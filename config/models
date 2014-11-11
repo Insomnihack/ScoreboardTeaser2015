@@ -1,0 +1,33 @@
+Team
+    login Text
+    password ByteString
+    email Text
+    verkey Text
+    verified Bool
+    resetkey Text
+    UniqueTeamEmail email
+    UniqueTeamLogin login
+    deriving Typeable
+Task
+    name Text
+    description Text
+    type Text
+    flag ByteString
+    value Int
+    open Bool default=False
+    script Text
+    author Text
+    UniqueTask name
+    deriving Typeable
+    deriving Show
+Solved
+    teamId TeamId
+    taskId TaskId
+    timestamp UTCTime default=CURRENT_TIMESTAMP
+    UniqueSolved teamId taskId
+    deriving Show
+Message
+    script Text
+    timestamp UTCTime default=CURRENT_TIMESTAMP
+
+ -- By default this file is used in Model.hs (which is imported by Foundation.hs)

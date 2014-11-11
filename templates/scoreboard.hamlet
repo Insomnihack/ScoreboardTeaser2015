@@ -1,0 +1,3 @@
+<div .content #parent>
+  <h2 .content-head .is-center>_{MsgHScoreboard}
+  <div #scoreboard>

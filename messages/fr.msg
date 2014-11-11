@@ -1,0 +1,1 @@
+TeamMailExist: Ce nom d'équipe ou adresse email est déjà utilisé

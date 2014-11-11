@@ -1,0 +1,13 @@
+function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}
+
+var msg = decodeHtml(#{toJSON msg});
+
+if (msg != ""){
+  var msgDiv = document.getElementById("message");
+  msgDiv.textContent = msg;
+  msgDiv.style.display = "block";
+}

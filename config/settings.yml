@@ -1,0 +1,27 @@
+Default: &defaults
+  host: "*4" # any IPv4 host
+  port: 3000
+  approot: ""
+  staticHost: "http://localhost:3000/static"
+  copyright: "Teaser Insomni'hack 2015"
+  defaultHostname: "http://localhost:3000"
+  TLS: False
+  SESFrom: "florian.gaultier@gmail.com"
+  SESAccessKey: "AKIAIMBI2DHJGIKQUAYQ"
+  SESSecretKey: "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"
+  SESRegion: "eu-west-1"
+
+Development:
+  <<: *defaults
+
+Testing:
+  <<: *defaults
+
+Staging:
+  <<: *defaults
+
+Production:
+  staticHost: "https://dl0kbifbyxlj5.cloudfront.net"
+  approot: ""
+  TLS: True
+  <<: *defaults

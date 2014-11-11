@@ -1,0 +1,37 @@
+# NOTE: These settings can be overridden by environment variables as well, in
+# particular:
+#
+#    PGHOST
+#    PGPORT
+#    PGUSER
+#    PGPASS
+#    PGDATABASE
+
+Default: &defaults
+  user: teaser_inso15
+  password: 6RWZ0DRIPKmJPV9ZQBHkPIdPlMQKhu2V
+  host: 127.0.0.1
+  port: 5432
+  database: teaser_inso15_db
+  poolsize: 10
+
+Development:
+  <<: *defaults
+
+Testing:
+  database: TeaserInso15_test
+  <<: *defaults
+
+Staging:
+  database: TeaserInso15_staging
+  poolsize: 100
+  <<: *defaults
+
+Production:
+  user: ik7t17ivnib
+  password: WxDHmuP39KQmKtxny3XHDYBeeHa45P
+  host: inso15.cu2ziq1o2yvz.eu-west-1.rds.amazonaws.com
+  port: 5432
+  database: inso15
+  poolsize: 100
+  <<: *defaults
