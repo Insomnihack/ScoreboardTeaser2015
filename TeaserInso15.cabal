@@ -34,6 +34,7 @@ library
                      Handler.SubmitFlag
                      Handler.GetScore
                      Handler.GetScoreboard
+                     Handler.GetMessages
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
@@ -92,6 +93,8 @@ library
                  , base16-bytestring             >= 0.1.1.6
                  , cryptohash                    >= 0.11.6
                  , tuple                         >= 0.3.0.2
+                 , http-types                    >= 0.8.5
+                 , random                        >= 1.0.1.1
 
     -- see https://github.com/yesodweb/yesod/issues/814
     if !os(windows)

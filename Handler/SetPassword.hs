@@ -8,7 +8,7 @@ postSetPasswordR :: Handler Html
 postSetPasswordR = do
               ((result, _), _) <- liftHandlerT $ runFormPost $ renderDivs $ myNewPasswordForm "" ""
               case result of
-                FormFailure msg -> setMessage $ toHtml $ T.concat msg
+                FormFailure msg -> setMessage $ toHtml $ T.intercalate (T.pack ", ") msg
                 FormSuccess (NewPasswordData uname key pwd1 pwd2) -> do
                   muser <- runAccountDB $ loadUser uname
                   case muser of

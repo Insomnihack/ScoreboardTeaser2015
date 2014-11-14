@@ -6,52 +6,52 @@ function extractName(solvedTask){
   return solvedTask.name;
 }
 
-function extractEvent(solvedArray, taskName){
-  var ret = "";
-  for(i=0;i<solvedArray.length; i++){
-    if(taskName == solvedArray[i].name){
-      ret = solvedArray[i].event;
-    }
-  }
-  return ret;
-}
-
 function solveTask(task, event, infos){
   task.removeEventListener("click", taskInfos, false);
   infos.event = event;
-  console.log(JSON.stringify(infos));
-  console.log(task);
   task.children[2].textContent=JSON.stringify(infos);
   task.addEventListener("click", solvedEvent, false);
-  task.classList.add("solved-button");
-  task.classList.remove("task-button");
 }
 
-function refreshScore(callback){
-  request = new XMLHttpRequest();
-  request.open('GET', '/getScore', true);
-
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400){
-      data = JSON.parse(request.responseText);
-      document.getElementById("score").textContent=data.score+"PTS"
-      var tasks = document.getElementsByClassName("task-button");
-      for(i=0;i<tasks.length;i++){
-        var infos = JSON.parse(tasks[i].children[2].textContent);
-        if(data.solved.map(extractName).indexOf(infos.name)!=-1){
-          callback(tasks[i], extractEvent(data.solved, infos.name), infos);
+function refreshScore(callback, neverDrawn){
+  requestScore = new XMLHttpRequest();
+  requestScore.open('GET', '/getScore', true);
+  requestScore.onload = function() {
+    if (requestScore.status >= 200 && requestScore.status < 400){
+      var etag = requestScore.getResponseHeader("ETag");
+      if(sessionStorage.getItem("cachedEtagPad") != etag || neverDrawn){
+        sessionStorage.setItem("cachedEtagPad", etag);
+        data = JSON.parse(requestScore.responseText);
+        var teamStatus = document.getElementById("teamstatus");
+        teamStatus.textContent=data.teamName+" - "+data.score+"PTS"
+        var br1 = document.createElement("br");
+        var br2 = document.createElement("br");
+        var br3 = document.createElement("br");
+        teamStatus.appendChild(br1);
+        teamStatus.appendChild(br2);
+        var challUser = document.createTextNode("Username : "+data.challUser);
+        var challPwd = document.createTextNode("Password : "+data.challPwd);
+        teamStatus.appendChild(challUser);
+        teamStatus.appendChild(br3);
+        teamStatus.appendChild(challPwd);
+        var tasks = document.getElementsByClassName("task-button");
+        for(i=0;i<tasks.length;i++){
+          var infos = JSON.parse(tasks[i].children[2].textContent);
+          if((n=data.solved.map(extractName).indexOf(infos.name))!=-1){
+            callback(tasks[i], data.solved[n].event, infos);
+          }
         }
       }
-    } else {
-      //
+    } else{
+        console.log("request status"+requestScore.status);
     }
   };
 
-  request.onerror = function() {
-    //
+  requestScore.onerror = function() {
+    console.log("request error");
   };
 
-  request.send();
+  requestScore.send();
 }
 
 function taskInfos(){
@@ -62,7 +62,7 @@ function taskInfos(){
   var flag = document.getElementById("flag")
   flag.value="";
   flag.focus();
-  divInfos.children[2].textContent = infos.description;
+  divInfos.children[2].innerHTML = infos.description;
   divInfos.children[4].value = infos.name;
 }
 
@@ -70,11 +70,11 @@ function submitFlag(){
   var flag = document.getElementById("flag").value;
   var taskname = document.getElementById("taskname").value;
 
-  var request = new XMLHttpRequest();
-  request.open('POST', '/submitFlag/'+encodeURIComponent(taskname), true);
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400){
-      data = JSON.parse(request.responseText);
+  var requestFlag = new XMLHttpRequest();
+  requestFlag.open('POST', '/submitFlag/'+encodeURIComponent(taskname), true);
+  requestFlag.onload = function() {
+    if (requestFlag.status >= 200 && requestFlag.status < 400){
+      data = JSON.parse(requestFlag.responseText);
       document.getElementById("flag").value=data.status;
       if(data.status=="ok"){
         document.getElementById('hideshow').style.visibility='hidden';
@@ -86,11 +86,11 @@ function submitFlag(){
     }
   };
 
-  request.onerror = function() {
+  requestFlag.onerror = function() {
     //
   };
 
-  request.send(flag);
+  requestFlag.send(flag);
 }
 
 function solvedEvent(){
@@ -98,20 +98,21 @@ function solvedEvent(){
   eval(infos.event);
 }
 
-var tasks = document.getElementsByClassName("task-button");
-var solved = document.getElementsByClassName("solved-button");
-var exit = document.getElementById("exit");
-var submit = document.getElementById("submitFlag");
-submit.addEventListener("click", submitFlag, false);
-exit.addEventListener("click", function(){ document.getElementById('hideshow').style.visibility='hidden';}, false);
+window.addEventListener('load', function(){
+  var tasks = document.getElementsByClassName("task-button");
+  var exit = document.getElementById("exit");
+  var submit = document.getElementById("submitFlag");
+  submit.addEventListener("click", submitFlag, false);
+  exit.addEventListener("click", function(){ document.getElementById('hideshow').style.visibility='hidden';}, false);
 
-for(i=0;i<tasks.length;i++){
-  tasks[i].addEventListener("click", taskInfos, false);
-}
+  for(i=0;i<tasks.length;i++){
+    tasks[i].addEventListener("click", taskInfos, false);
+  }
 
-for(i=0;i<solved.length;i++){
-  solved[i].addEventListener("click", solvedEvent, false);
-}
+  refreshScore(solveTask, true);
+  window.setInterval(function () {refreshScore(solveTask, false)}, 1000*60);
+
+});
 
 window.addEventListener("keydown", function(e){
   if(e.keyCode === 27){

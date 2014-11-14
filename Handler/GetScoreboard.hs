@@ -5,14 +5,15 @@ import Import
 import qualified Data.Text as T
 import qualified Data.List as L
 import qualified Data.Int as I
+import MyFunc
 import Data.Tuple.Select
 import Data.Time.Clock.POSIX
 
-quicksort :: (Ord a) => [(x,a,y,z)] -> [(x,a,y,z)]
+quicksort :: (Ord a) => [(x,a,y,UTCTime)] -> [(x,a,y,UTCTime)]
 quicksort [] = []
-quicksort (x@(_,scoreX,_,_):xs) =
-    let smallerSorted = quicksort [(name, score, ar, t) | (name, score, ar, t) <- xs, score <= scoreX]
-        biggerSorted = quicksort [(name, score, ar, t) | (name, score, ar, t) <- xs, score > scoreX]
+quicksort (x@(_,scoreX,_,time):xs) =
+    let smallerSorted = quicksort [(name, score, ar, t) | (name, score, ar, t) <- xs, if score == scoreX then t > time else score < scoreX]
+        biggerSorted = quicksort [(name, score, ar, t) | (name, score, ar, t) <- xs, if score == scoreX then t <= time else score > scoreX]
     in  biggerSorted ++ [x] ++ smallerSorted
 
 
@@ -78,14 +79,22 @@ genScoreboard res ((Entity t team):teams) tasks solveds =
 getGetScoreboardR :: Handler Value
 getGetScoreboardR =
     do
-      cacheSeconds 60
+      addHeader ("Access-Control-Allow-Origin"::T.Text) ("*"::T.Text)
+      addHeader ("Access-Control-Expose-Headers"::T.Text) ("Etag"::T.Text)
+      cacheSeconds 30
       allTeams <- runDB $ selectList [TeamVerified ==. True] [Asc TeamLogin]
       allTasks <- runDB $ selectList [TaskOpen ==. True] [Asc TaskName]
       allSolved :: [Entity Solved] <- runDB $ selectList [] []
 
       let scoreboard = genScoreboard [] allTeams allTasks allSolved
       let sortedScoreboard = toObject (1 :: I.Int64) scoreboard
-      returnJson $ object ["tasks" .= (map extractNames allTasks), "standings" .= sortedScoreboard]
+      let final = object ["tasks" .= (map extractNames allTasks), "standings" .= sortedScoreboard]
+      modified <- isNewResponse $ T.pack $ show final
+      if modified
+        then
+          returnJson final
+        else
+          sendResponseStatus status304 ("Not Modified" ::T.Text)
       where
           extractNames :: Entity Task -> T.Text
           extractNames (Entity _ t) = taskName t

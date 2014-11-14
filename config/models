@@ -5,6 +5,8 @@ Team
     verkey Text
     verified Bool
     resetkey Text
+    challuser Text
+    challpwd Text
     UniqueTeamEmail email
     UniqueTeamLogin login
     deriving Typeable
@@ -27,7 +29,12 @@ Solved
     UniqueSolved teamId taskId
     deriving Show
 Message
+    title Text
+    message Text
     script Text
     timestamp UTCTime default=CURRENT_TIMESTAMP
+    UniqueTitle title
+State
+    open Bool default=True
 
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)

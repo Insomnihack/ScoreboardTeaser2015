@@ -8,9 +8,9 @@ postResetPasswordR :: Handler Html
 postResetPasswordR = do
                         ((result, _), _) <- liftHandlerT $ runFormPost $ renderDivs myResetPasswordForm
                         case result of
-                          FormFailure msg -> do setMessage $ toHtml $ T.concat msg
+                          FormFailure msg -> do setMessage $ toHtml $ T.intercalate (T.pack ", ") msg
                           FormSuccess u -> do
-                                          mu <- runDB $ getBy (UniqueTeamLogin u)
+                                          mu <- runDB $ getBy (UniqueTeamEmail u)
                                           case mu of
                                             Just user -> do
                                               if userEmailVerified user
@@ -20,8 +20,8 @@ postResetPasswordR = do
                                                     render <- getUrlRender
                                                     sendNewPasswordEmail (username user) (userEmail user) $ render $ NewPasswordR (username user) key
                                                     -- setMessageI MsgResetLink
-                                                    else do
-                                                      setMessageI MsgTeamNotVerified
+                                                  else do
+                                                    setMessageI MsgTeamNotVerified
                                             Nothing ->
                                               setMessageI MsgTeamNotFound
 

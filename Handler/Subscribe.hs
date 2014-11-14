@@ -36,7 +36,7 @@ postSubscribeR = do
                         return $ Left [msgr MsgUnknownForm]
 
                     case mdata of
-                      Left errs -> do setMessage $ toHtml $ T.concat errs
+                      Left errs -> do setMessage $ toHtml $ T.intercalate (T.pack ", ") errs
                       Right (user, email, key) -> do
                         render <- getUrlRender
                         sendVerifyEmail user email $ render $ VerifyR user key

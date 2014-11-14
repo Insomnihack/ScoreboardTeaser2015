@@ -2,26 +2,30 @@ Default: &defaults
   host: "*4" # any IPv4 host
   port: 3000
   approot: ""
-  staticHost: "http://localhost:3000/static"
+  staticHost: "http://192.168.79.67:3000/static"
+  cacheHost: "http://192.168.79.67:3000/"
   copyright: "Teaser Insomni'hack 2015"
-  defaultHostname: "http://localhost:3000"
+  defaultHostname: "http://192.168.79.67:3000"
   TLS: False
-  SESFrom: "florian.gaultier@gmail.com"
-  SESAccessKey: "AKIAIMBI2DHJGIKQUAYQ"
-  SESSecretKey: "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"
+  SESFrom:
+  SESAccessKey:
+  SESSecretKey:
   SESRegion: "eu-west-1"
 
 Development:
   <<: *defaults
 
 Testing:
+  staticHost: "http://192.168.79.67/static"
+  cacheHost: "http://192.168.79.67/"
   <<: *defaults
 
 Staging:
   <<: *defaults
 
 Production:
+  cacheHost: "https://d354firlujjt9e.cloudfront.net/"
   staticHost: "https://dl0kbifbyxlj5.cloudfront.net"
   approot: ""
-  TLS: True
+  TLS: False
   <<: *defaults

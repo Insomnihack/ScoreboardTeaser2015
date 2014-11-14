@@ -13,6 +13,7 @@ import           Data.Time              as Import (getCurrentTime)
 import           Data.List              as Import (nub)
 import           Data.Time.Clock.POSIX  as Import (posixSecondsToUTCTime)
 import           Data.Time.Clock        as Import (UTCTime)
+import           Network.HTTP.Types     as Import (status304)
 
 import           Control.Applicative    as Import (pure, (<$>), (<*>))
 import           Data.ByteString        as Import (ByteString)

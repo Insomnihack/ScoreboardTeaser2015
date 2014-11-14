@@ -8,9 +8,9 @@ postResendVerifyR :: Handler Html
 postResendVerifyR = do
                       ((result, _), _) <- liftHandlerT $ runFormPost $ renderDivs resendVerifyForm
                       case result of
-                        FormFailure msg -> do setMessage $ toHtml $ T.concat msg
+                        FormFailure msg -> do setMessage $ toHtml $ T.intercalate (T.pack ", ") msg
                         FormSuccess u -> do
-                                        mu <- runDB $ getBy (UniqueTeamLogin u)
+                                        mu <- runDB $ getBy (UniqueTeamEmail u)
                                         case mu of
                                           Just user -> do
                                             if userEmailVerified user

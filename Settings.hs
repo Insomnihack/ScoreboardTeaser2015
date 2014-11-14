@@ -43,6 +43,9 @@ staticDir = "static"
 staticRoot :: AppConfig DefaultEnv Extra -> Text
 staticRoot conf = extraStaticHost $ appExtra conf
 
+cacheRoot :: AppConfig DefaultEnv Extra -> Text
+cacheRoot conf = extraCacheHost $ appExtra conf
+
 -- | Settings for 'widgetFile', such as which template languages to support and
 -- default Hamlet settings.
 --
@@ -73,6 +76,7 @@ data Extra = Extra
     , extraSESSecretKey :: Text
     , extraSESRegion :: Text
     , extraStaticHost :: Text
+    , extraCacheHost :: Text
     } deriving Show
 
 parseExtra :: DefaultEnv -> Object -> Parser Extra
@@ -85,3 +89,4 @@ parseExtra _ o = Extra
     <*> o .:  "SESSecretKey"
     <*> o .:  "SESRegion"
     <*> o .:  "staticHost"
+    <*> o .:  "cacheHost"

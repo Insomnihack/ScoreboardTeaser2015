@@ -17,7 +17,7 @@ myResetPasswordForm :: (YesodAuthAccount db master
                      , HandlerSite m ~ master
                      ) => AForm m Username
 myResetPasswordForm = areq textField userSettings Nothing
-    where userSettings = FieldSettings "Team Name" Nothing Nothing (Just "resetName") []
+    where userSettings = FieldSettings "Email" Nothing Nothing (Just "resetEmail") []
 
 
 myNewPasswordForm :: (YesodAuth master, RenderMessage master FormMessage, MonadHandler m, HandlerSite m ~ master)
@@ -51,4 +51,4 @@ resendVerifyForm :: (YesodAuthAccount db master
                      , HandlerSite m ~ master
                      ) => AForm m Username
 resendVerifyForm = areq textField userSettings (Just "")
-    where userSettings = FieldSettings "Team Name" Nothing Nothing (Just "resendName") []
+    where userSettings = FieldSettings "Email" Nothing Nothing (Just "resendEmail") []

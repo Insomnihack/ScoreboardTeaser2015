@@ -9,7 +9,7 @@
 
 Default: &defaults
   user: teaser_inso15
-  password: 6RWZ0DRIPKmJPV9ZQBHkPIdPlMQKhu2V
+  password:
   host: 127.0.0.1
   port: 5432
   database: teaser_inso15_db
@@ -19,7 +19,6 @@ Development:
   <<: *defaults
 
 Testing:
-  database: TeaserInso15_test
   <<: *defaults
 
 Staging:
@@ -28,9 +27,9 @@ Staging:
   <<: *defaults
 
 Production:
-  user: ik7t17ivnib
-  password: WxDHmuP39KQmKtxny3XHDYBeeHa45P
-  host: inso15.cu2ziq1o2yvz.eu-west-1.rds.amazonaws.com
+  user:
+  password:
+  host:
   port: 5432
   database: inso15
   poolsize: 100

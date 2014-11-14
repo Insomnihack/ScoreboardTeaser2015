@@ -16,15 +16,15 @@ stanzas:
 
     # Command line options passed to your application.
     args:
+      #- Testing
       - Production
 
     hosts:
       # You can specify one or more hostnames for your application to respond
       # to. The primary hostname will be used for generating your application
       # root.
-      - d354firlujjt9e.cloudfront.net
+      #- 192.168.79.67
       - inso2015-2124835692.eu-west-1.elb.amazonaws.com
-      - ec2-54-171-54-232.eu-west-1.compute.amazonaws.com
 
     # Enable to force Keter to redirect to https
     # Can be added to any stanza
@@ -54,7 +54,7 @@ stanzas:
 
 # Use the following to automatically copy your bundle upon creation via `yesod
 # keter`. Uses `scp` internally, so you can set it to a remote destination
-copy-to: ubuntu@ec2-54-171-54-232.eu-west-1.compute.amazonaws.com:/opt/keter/incoming
+#copy-to: ubuntu@ec2-54-171-54-232.eu-west-1.compute.amazonaws.com:/opt/keter/incoming
 
 # If you would like to have Keter automatically create a PostgreSQL database
 # and set appropriate environment variables for it to be discovered, uncomment

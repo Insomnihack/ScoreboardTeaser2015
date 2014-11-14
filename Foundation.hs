@@ -7,7 +7,6 @@ import Yesod.Static
 import Yesod.Auth
 import Yesod.Auth.Account
 import Yesod.Default.Config
-import Yesod.Default.Util (addStaticContentExternal)
 import Network.Mail.Mime
 import Network.Mail.Mime.SES
 import Network.Wai.Internal
@@ -22,7 +21,6 @@ import Model
 import Database.Persist.Sql (toSqlKey)
 import qualified Data.Text as T
 import qualified Data.Int as I
-import Text.Jasmine (minifym)
 import Text.Hamlet (hamletFile)
 import Text.Blaze.Html.Renderer.String
 import Data.Text.Encoding (encodeUtf8, decodeUtf8)
@@ -54,7 +52,7 @@ instance PersistUserCredentials Team where
     userResetPwdKeyF = TeamResetkey
     uniqueUsername = UniqueTeamLogin
 
-    userCreate name email key pwd = Team name pwd email key False ""
+    userCreate name email key pwd = Team name pwd email key False "" "" ""
 
 -- Set up i18n messages. See the message folder.
 mkMessage "App" "messages" "en"

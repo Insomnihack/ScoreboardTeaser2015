@@ -1,25 +1,16 @@
 <div .splash-container>
   <div .splash #pad>
-    <h1 class="splash-head">#{teamName} - <span id="score">#{fst solvedTasks}pts</span>
+    <h1 class="splash-head" #teamstatus>
     <p #message .pure-alert style="display:none">
     <div .pure-g>
       $forall Entity _ task <- tasks
-        $maybe _ <- L.find (isSolved task) (snd solvedTasks)
-          <div .l-box .pure-u-1-4 .solved-button .pure-button .#{taskType task}>
-            <p>
-              #{taskName task}
-            <span>
-              #{taskValue task}
-            <span style="display:none" .task-infos>
-              #{toJsonText $ object ["name" .= taskName task, "type" .= taskType task, "description" .= taskDescription task, "author" .= taskAuthor task, "event" .= taskScript task]}
-        $nothing
-          <div .l-box .pure-u-1-4 .task-button .pure-button .#{taskType task}>
-            <p>
-              #{taskName task}
-            <span>
-              #{taskValue task}
-            <span style="display:none" .task-infos>
-              #{toJsonText $ object ["name" .= taskName task, "type" .= taskType task, "description" .= taskDescription task, "author" .= taskAuthor task]}
+        <div .l-box .pure-u-1-4 .task-button .pure-button .#{taskType task}>
+          <p>
+            #{taskName task}
+          <span>
+            #{taskValue task}
+          <span style="display:none" .task-infos>
+            #{toJsonText $ object ["name" .= taskName task, "type" .= taskType task, "description" .= taskDescription task, "author" .= taskAuthor task]}
 
 <div #hideshow style="visibility: hidden;">
   <div #fade>
@@ -32,34 +23,3 @@
       <input type="text" name="flag" #flag>
       <input type="hidden" name="taskname" #taskname>
       <button #submitFlag>_{MsgBtnSubmit}
-
-
-
-<div .content-wrapper>
-  <div .content>
-    <h2 .content-head .is-center>Excepteur sint occaecat cupidatat.
-    <div .pure-g>
-      <div .l-box .pure-u-1 .pure-u-md-1-2 .pure-u-lg-1-4>
-        <h3 .content-subhead>
-          <i .fa fa-rocket>
-          Get Started Quickly
-        <p>
-          Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.
-      <div .l-box .pure-u-1 .pure-u-md-1-2 .pure-u-lg-1-4>
-        <h3 .content-subhead>
-          <i .fa .fa-mobile>
-            Responsive Layouts
-        <p>
-          Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.
-      <div .l-box pure-u-1 .pure-u-md-1-2 .pure-u-lg-1-4>
-        <h3 .content-subhead>
-          <i .fa fa-th-large>
-            Modular
-        <p>
-          Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.
-      <div .l-box .pure-u-1 .pure-u-md-1-2 .pure-u-lg-1-4>
-        <h3 .content-subhead>
-          <i .fa .fa-check-square-o>
-          Plays Nice
-        <p>
-          Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.

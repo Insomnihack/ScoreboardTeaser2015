@@ -218,6 +218,10 @@ a.pure-button-primary {
     height: 80%;
 }
 
+#news{
+    width:100%;
+}
+
 /* This is the main heading that appears on the blue section */
 .splash-head {
     font-size: 20px;
@@ -245,7 +249,8 @@ a.pure-button-primary {
     /* These styles are required for the "scroll-over" effect */
     position: absolute;
     top: 87%;
-    width: 100%;
+    min-width: 800px;
+    width:100%;
     min-height: 12%;
     z-index: 2;
     background: white;

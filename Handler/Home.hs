@@ -3,9 +3,7 @@ module Handler.Home where
 
 import Import
 import MyAuth
-import MyFunc
 import qualified Data.Text as T
-import qualified Data.List as L
 -- This is a handler function for the GET request method on the HomeR
 -- resource pattern. All of your resource patterns are defined in
 -- config/routes
@@ -20,21 +18,17 @@ getHomeR = do
     case mtid of
         Nothing -> do
             ((_, loginWidget), enctype) <- liftHandlerT $ runFormPost $ renderDivs loginForm
-            defaultLayout $(widgetFile "homepage")
-        Just tid -> do
-            mTeamName <- lookupSession "teamName"
-            teamName <- case mTeamName of
-                          Nothing -> do
-                            $(logWarn) ("Logged without Team Name" ::T.Text)
-                            _ <- redirect MyLogoutR
-                            return ""
-                          Just t -> return t
-            solvedTasks <- getScoreTeam tid
-            let isSolved task = (\ (n,_) -> n == (taskName task))
+            defaultLayout $ do
+              addScript $ StaticR js_message_js
+              $(widgetFile "homepage")
+              $(widgetFile "messages")
+        Just _ -> do
             tasks <- runDB $ selectList [TaskOpen ==. True] []
             defaultLayout $ do
                 addScript $ StaticR js_pad_js
+                addScript $ StaticR js_message_js
                 $(widgetFile "homepageAuth")
+                $(widgetFile "messages")
 
 postHomeR :: Handler Html
 postHomeR = do
@@ -56,10 +50,12 @@ postHomeR = do
 
               case muser of
                 Left errs -> do
-                  setMessage $ toHtml $ T.concat errs
+                  setMessage $ toHtml $ T.intercalate (T.pack ", ") errs
                 Right team@(Entity tid t) -> if userEmailVerified team
                             then do
                               setSession "teamName" (teamLogin t)
+                              setSession "challUser" (teamChalluser t)
+                              setSession "challPwd" (teamChallpwd t)
                               setCreds True $ Creds "ctf" (toPathPiece tid) []
                             else do
                               setMessageI MsgNeedValidation

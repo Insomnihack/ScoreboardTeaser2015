@@ -1,21 +1,27 @@
-function getScoreboard(callback){
-  request = new XMLHttpRequest();
-  request.open('GET', '/getScoreboard', true);
+function getScoreboard(callback, neverDrawn){
+  requestScoreboard = new XMLHttpRequest();
+  requestScoreboard.open('GET', CacheRoot+GetScoreboardR, true);
 
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400){
-      data = JSON.parse(request.responseText);
-      callback(data);
-    } else {
-      //
+  requestScoreboard.onload = function() {
+    if (requestScoreboard.status >= 200 && requestScoreboard.status < 400){
+        var etag = requestScoreboard.getResponseHeader("ETag");
+        if(sessionStorage.getItem("cachedEtagScore") != etag || neverDrawn){
+            sessionStorage.setItem("cachedEtagScore", etag);
+            data = JSON.parse(requestScoreboard.responseText);
+            callback(data);
+        }
+    } else if(requestScoreboard.status==1 || requestScoreboard.status==0) {
+        getScoreboard(callback, neverDrawn);
+    } else{
+        console.log("requestScoreboard status"+requestScoreboard.status);
     }
   };
 
-  request.onerror = function() {
-    //
+  requestScoreboard.onerror = function() {
+    console.log("requestScoreboard error");
   };
 
-  request.send();
+  requestScoreboard.send();
 }
 
 function extractName(solvedTask){
@@ -80,5 +86,7 @@ function loadHTMLScoreboard(object){
   parent.appendChild(scoreboard);
 }
 
-getScoreboard(loadHTMLScoreboard);
-window.setInterval(function () {getScoreboard(loadHTMLScoreboard)}, 5000);
+window.addEventListener('load', function(){
+  getScoreboard(loadHTMLScoreboard, true);
+  window.setInterval(function () {getScoreboard(loadHTMLScoreboard, false)}, 5000);
+});

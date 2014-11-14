@@ -11,3 +11,7 @@ if (msg != ""){
   msgDiv.textContent = msg;
   msgDiv.style.display = "block";
 }
+
+CacheRoot = #{toJSON $ Settings.cacheRoot $ settings master}
+GetScoreboardR = #{toJSON $ head $ fst $ renderRoute GetScoreboardR};
+GetMessagesR = #{toJSON $ head $ fst $ renderRoute GetMessagesR};
