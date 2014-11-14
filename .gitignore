@@ -13,4 +13,5 @@ cabal.sandbox.config
 .DS_Store
 *.swp
 *.yml
-
+*.sh
+*.keter
