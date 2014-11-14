@@ -44,6 +44,7 @@ This mean you don't have enough RAM to compile.
     * Create and edit config/settings.yml as follow
 ```
 #!yaml
+
 Default: &defaults
   host: "*4" # any IPv4 host
   port: 3000
@@ -69,11 +70,14 @@ Staging:
 
 Production:
   <<: *defaults
+
 ```
 
-    * Create and edit config/postgresql.yml as follow
+* Create and edit config/postgresql.yml as follow
+
 ```
 #!yaml
+
 # NOTE: These settings can be overridden by environment variables as well, in
 # particular:
 #
@@ -102,12 +106,14 @@ Staging:
 
 Production:
   <<: *defaults
+
 ```
 
-    * Create and edit config/keter.yml as follow
+* Create and edit config/keter.yml as follow
 
 ```
 #!yaml
+
 user-edited: true
 stanzas:
 
@@ -130,6 +136,7 @@ stanzas:
 # Use the following to automatically copy your bundle upon creation via `yesod
 # keter`. Uses `scp` internally, so you can set it to a remote destination
 #copy-to: ubuntu@ec2-54-171-54-232.eu-west-1.compute.amazonaws.com:/opt/keter/incoming
+
 ```
 
 ### Contribution guidelines ###
