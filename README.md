@@ -139,8 +139,6 @@ stanzas:
 
 ```
 
-### Contribution guidelines ###
+* From your cloned directory run `yesod devel`
 
-* Writing tests
-* Code review
-* Other guidelines
+It will compile and run your instance in dev mode (more verbosity), enjoy !
