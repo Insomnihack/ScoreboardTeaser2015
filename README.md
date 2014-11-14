@@ -6,6 +6,7 @@
 
 ### How do I get set up? ###
 
+* You need connection to postgresql database, application will create every table at first launch.
 * Install haskell and use stackage cabal repository (that is a clean repo without buggy version dependencies) https://github.com/fpco/stackage/wiki/Preparing-your-system-to-use-Stackage
 * Install necessary build tools: `cabal install alex happy yesod-bin`
 * Install unknown stackage dependencies (RESPECT ORDER)
