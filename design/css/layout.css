@@ -61,6 +61,8 @@ body {
 
 .task-button {
     background-image: url("../img/snow.jpg");
+    width: 23%;
+    margin-bottom:10px;
 }
 
 h1,
@@ -129,7 +131,7 @@ label {
 .pure-button {
     background-color: #6a6a6a;
     color: white;
-    padding: 0.5em 2em;
+    padding: 0.4em 1em;
     border-radius: 5px;
     background-image: url("../img/tv.png");
     background-size: 100% 100%;
@@ -141,7 +143,7 @@ label {
 .pure-button-hover {
     background-color: #000000;
     color: white;
-    padding: 0.5em 2em;
+    padding: 0.4em 1em;
     border-radius: 5px;
     background-image: url("../img/tv.png");
     background-size: 100% 100%;
@@ -237,13 +239,13 @@ a.pure-button-primary {
 }
 
 #parent {
-    min-width:800px;
+    min-width:900px;
     width: 100%;
     height: 80%;
 }
 
 #pad {
-    min-width:800px;
+    min-width:900px;
     width: 80%;
     height: 80%;
 }
@@ -279,7 +281,7 @@ a.pure-button-primary {
     /* These styles are required for the "scroll-over" effect */
     position: absolute;
     top: 87%;
-    min-width: 800px;
+    min-width: 900px;
     width:100%;
     min-height: 12%;
     z-index: 2;
