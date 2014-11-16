@@ -9,36 +9,36 @@ import MyFunc
 import Data.Tuple.Select
 import Data.Time.Clock.POSIX
 
-quicksort :: (Ord a) => [(x,a,y,UTCTime)] -> [(x,a,y,UTCTime)]
+quicksort :: [(x,z,Int,y,UTCTime)] -> [(x,z,Int,y,UTCTime)]
 quicksort [] = []
-quicksort (x@(_,scoreX,_,time):xs) =
-    let smallerSorted = quicksort [(name, score, ar, t) | (name, score, ar, t) <- xs, if score == scoreX then t > time else score < scoreX]
-        biggerSorted = quicksort [(name, score, ar, t) | (name, score, ar, t) <- xs, if score == scoreX then t <= time else score > scoreX]
+quicksort (x@(_,_,scoreX,_,time):xs) =
+    let smallerSorted = quicksort [(name, c, score, ar, t) | (name, c, score, ar, t) <- xs, if score == scoreX then t > time else score < scoreX]
+        biggerSorted = quicksort [(name, c, score, ar, t) | (name, c, score, ar, t) <- xs, if score == scoreX then t <= time else score > scoreX]
     in  biggerSorted ++ [x] ++ smallerSorted
 
 
-genScoreboardLite :: [(T.Text, Int)] -> [Entity Team] -> [Entity Task] -> [Entity Solved] -> Handler [(T.Text, Int)]
-genScoreboardLite res [] _ _ = do return res
-genScoreboardLite res ((Entity t team):teams) tasks solveds =
-                        genScoreboardLite (res ++ [((teamLogin team),(sum solvedScores))]) teams tasks solveds
-                        where solvedScores :: [Int]
-                              solvedScores = foldl (\a (Entity _ solved) ->
-                                                    if (solvedTeamId solved) == t
-                                                      then a++[getTaskValue (solvedTaskId solved)]
-                                                      else a
-                                                   ) [] solveds
-                              getTaskValue :: Key Task -> Int
-                              getTaskValue stid = (
-                                                    \task -> case task of
-                                                      Nothing -> 0
-                                                      Just (Entity _ tval) -> (taskValue tval)
-                                                  ) $ L.find (\(Entity t2 _) -> t2 == stid) tasks
+--genScoreboardLite :: [(T.Text, Int)] -> [Entity Team] -> [Entity Task] -> [Entity Solved] -> Handler [(T.Text, Int)]
+--genScoreboardLite res [] _ _ = do return res
+--genScoreboardLite res ((Entity t team):teams) tasks solveds =
+--                        genScoreboardLite (res ++ [((teamLogin team),(sum solvedScores))]) teams tasks solveds
+--                        where solvedScores :: [Int]
+--                              solvedScores = foldl (\a (Entity _ solved) ->
+--                                                    if (solvedTeamId solved) == t
+--                                                      then a++[getTaskValue (solvedTaskId solved)]
+--                                                      else a
+--                                                   ) [] solveds
+--                              getTaskValue :: Key Task -> Int
+--                              getTaskValue stid = (
+--                                                    \task -> case task of
+--                                                      Nothing -> 0
+--                                                      Just (Entity _ tval) -> (taskValue tval)
+--                                                  ) $ L.find (\(Entity t2 _) -> t2 == stid) tasks
 
-genScoreboard ::  [(T.Text, Int, [(T.Text, Int, UTCTime)], UTCTime)] ->
+genScoreboard ::  [(T.Text, T.Text, Int, [(T.Text, Int, UTCTime)], UTCTime)] ->
                     [Entity Team] ->
                       [Entity Task] ->
                         [Entity Solved] ->
-                          [(T.Text, Int, [(T.Text, Int, UTCTime)], UTCTime)]
+                          [(T.Text, T.Text, Int, [(T.Text, Int, UTCTime)], UTCTime)]
 genScoreboard res [] _ _ = quicksort res
 genScoreboard res ((Entity t team):teams) tasks solveds =
     let
@@ -68,6 +68,7 @@ genScoreboard res ((Entity t team):teams) tasks solveds =
         (res ++
             [(
                 teamLogin team,
+                teamCountry team,
                 sum $ map sel2 solvedScores,
                 solvedScores,
                 maximum $ map sel3 (solvedScores ++ [("", 0, posixSecondsToUTCTime 0)])
@@ -99,7 +100,7 @@ getGetScoreboardR =
           extractNames :: Entity Task -> T.Text
           extractNames (Entity _ t) = taskName t
 
-          toObject :: I.Int64 -> [(T.Text, Int, [(T.Text, Int, UTCTime)], UTCTime)] -> [Value]
+          toObject :: I.Int64 -> [(T.Text, T.Text, Int, [(T.Text, Int, UTCTime)], UTCTime)] -> [Value]
           toObject _ [] = []
           toObject i (x:xs) =
               let
@@ -114,9 +115,10 @@ getGetScoreboardR =
               in [object[
                   "pos" .= i,
                   "team" .= sel1 x,
-                  "score" .= sel2 x,
-                  "taskStats" .= map toTaskObject (sel3 x),
-                  "lastAccept" .= (round $ utcTimeToPOSIXSeconds $ sel4 x :: Int)
+                  "country" .= sel2 x,
+                  "score" .= sel3 x,
+                  "taskStats" .= map toTaskObject (sel4 x),
+                  "lastAccept" .= (round $ utcTimeToPOSIXSeconds $ sel5 x :: Int)
                   ]] ++ (toObject (i+1) xs)
 
 

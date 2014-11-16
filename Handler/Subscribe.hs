@@ -2,6 +2,7 @@ module Handler.Subscribe where
 
 import Import
 import MyAuth
+import qualified Yesod.Core.Handler as C
 import qualified Data.Text as T
 
 getSubscribeR :: Handler Html
@@ -13,13 +14,13 @@ getSubscribeR = do
 
 postSubscribeR :: Handler Html
 postSubscribeR = do
-                    msgr <- getMessageRender
+                    msgr <- C.getMessageRender
                     ((result, newAccountWidget), enctypeAccount) <- liftHandlerT $ runFormPost $ renderDivs newAccountForm
                     ((_, myResetPasswordWidget), enctypeReset) <- liftHandlerT $ runFormPost $ renderDivs myResetPasswordForm
                     ((_, resendVerifyWidget), enctypeResend) <- liftHandlerT $ runFormPost $ renderDivs resendVerifyForm
                     mdata <- case result of
                       FormFailure msg -> return $ Left msg
-                      FormSuccess (NewAccountData u email pwd pwd2) -> do
+                      FormSuccess (NewTeamData u email country pwd pwd2) -> do
                         if pwd == pwd2
                           then do
                               key <- newVerifyKey
@@ -29,7 +30,9 @@ postSubscribeR = do
                                 Left err -> do
                                   $(logWarn) err
                                   return $ Left [msgr MsgTeamMailExist]
-                                Right _ -> do return $ Right $ (u, email, key)
+                                Right (Entity new _) -> do
+                                  runDB $ update new [TeamCountry =. country]
+                                  return $ Right $ (u, email, key)
                           else return $ Left [msgr MsgPasswordsMissmatch]
                       x -> do
                         $(logWarn) $ T.pack $ show x

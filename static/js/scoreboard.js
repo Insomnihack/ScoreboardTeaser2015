@@ -39,6 +39,20 @@ function genCase(line, task, size){
   line.appendChild(hcase);
 }
 
+function genCaseTeam(line, task, country, size){
+  var hcase = document.createElement("div");
+  hcase.classList.add("l-box");
+  hcase.classList.add("pure-u-1-"+size);
+  var pcontent = document.createElement("p");
+  var content = document.createTextNode(task);
+  var img = document.createElement('img');
+  img.src = country
+  pcontent.appendChild(content);
+  pcontent.appendChild(img);
+  hcase.appendChild(pcontent);
+  line.appendChild(hcase);
+}
+
 function genTaskCase(line, task, solvedTasks, size){
   var bcase = document.createElement("div");
   bcase.classList.add("l-box");
@@ -69,7 +83,7 @@ function headerTasks(body, arrayTasks){
 function genScoreboard(body, team, tasks){
   var line = document.createElement("div");
   line.classList.add("pure-g");
-  genCase(line, '#'+team.pos+' - '+team.team, tasks.length+2);
+  genCaseTeam(line, '#'+team.pos+' - '+team.team+' - ', StaticRoot+'/img/flags/'+team.country, tasks.length+2);
   genCase(line, team.score, tasks.length+2);
   tasks.map(function(x) { return genTaskCase(line, x, team.taskStats, tasks.length+2); });
   body.appendChild(line);

@@ -52,7 +52,7 @@ instance PersistUserCredentials Team where
     userResetPwdKeyF = TeamResetkey
     uniqueUsername = UniqueTeamLogin
 
-    userCreate name email key pwd = Team name pwd email key False "" "" ""
+    userCreate name email key pwd = Team name pwd email key False "" "" "" ""
 
 -- Set up i18n messages. See the message folder.
 mkMessage "App" "messages" "en"

@@ -13,5 +13,6 @@ if (msg != ""){
 }
 
 CacheRoot = #{toJSON $ Settings.cacheRoot $ settings master}
+StaticRoot = #{toJSON $ Settings.staticRoot $ settings master}
 GetScoreboardR = #{toJSON $ head $ fst $ renderRoute GetScoreboardR};
 GetMessagesR = #{toJSON $ head $ fst $ renderRoute GetMessagesR};
