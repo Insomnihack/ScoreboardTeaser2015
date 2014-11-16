@@ -11,6 +11,8 @@ function solveTask(task, event, infos){
   infos.event = event;
   task.children[2].textContent=JSON.stringify(infos);
   task.addEventListener("click", solvedEvent, false);
+  task.classList.add("solved-button");
+  task.classList.remove("task-button");
 }
 
 function refreshScore(callback, neverDrawn){
@@ -34,7 +36,7 @@ function refreshScore(callback, neverDrawn){
         teamStatus.appendChild(challUser);
         teamStatus.appendChild(br3);
         teamStatus.appendChild(challPwd);
-        var tasks = document.getElementsByClassName("task-button");
+        var tasks = document.getElementsByClassName("pure-button");
         for(i=0;i<tasks.length;i++){
           var infos = JSON.parse(tasks[i].children[2].textContent);
           if((n=data.solved.map(extractName).indexOf(infos.name))!=-1){
