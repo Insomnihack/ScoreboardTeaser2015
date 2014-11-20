@@ -4,52 +4,51 @@
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="https://dl0kbifbyxlj5.cloudfront.net/css/purealert.css?etag=I4kCGXKm">
 <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-<script>document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');</script></head>
+<script>document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');</script>
+<script src="js/pixi.dev.js"> </script>
+<script src="js/pixi.js"> </script>
+</head>
 <body><div class="header">
-<div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed"><ul><li class="pure-menu-selected"><a href="/">Home</a></li><li><a href="/scoreboard">Scoreboard</a></li><li><a href="/logout">Logout</a></li></ul></div></div><div class="splash-container"><div class="splash" id="pad"><h1 class="splash-head" id="teamstatus"></h1>
+<div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed"><ul><li class="pure-menu-selected"><a href="/">Home</a></li><li><a href="/scoreboard">Scoreboard</a></li><li><a href="/logout">Logout</a></li></ul></div></div>
+<div class="splash-container">
+
+<div class="splash-canvas">
+<canvas id="padcanvas" width="350" height="500" style="padcanvas">your browser does not support canvas</canvas>
+</div>
+<div class="splash" id="pad">
+<h1 class="splash-head" id="teamstatus"></h1>
 <p class="pure-alert" id="message" style="display:none"></p>
 <div class="pure-g">
-
-<div class="l-box pure-u task-button pure-button Guessing"><p>Challenge de ouf</p>
-<span>100</span>
-<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge de ouf+50&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag toto&quot;}</span>
-</div>
-<div class="pure-u pure-button-spacer"></div>
-<div class="l-box pure-u task-button pure-button Guessing"><p>Challenge de ouf</p>
-<span>150</span>
-<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge de ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag toto&quot;}</span>
-</div>
-<div class="pure-u pure-button-spacer"></div>
-<div class="l-box pure-u task-button pure-button Guessing"><p>Challenge encore plus ouf</p>
-<span>200</span>
-<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
-</div>
-<div class="pure-u pure-button-spacer"></div>
-<div class="l-box pure-u task-button pure-button Guessing"><p>Challenge encore plus ouf</p>
-<span>200</span>
-<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
-</div>
-<div class="pure-u pure-button-spacer"></div>
-<div class="l-box pure-u task-button pure-button Guessing"><p>Challenge encore plus ouf</p>
-<span>200</span>
-<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
-</div>
-<div class="pure-u pure-button-spacer"></div>
-<div class="l-box pure-u task-button pure-button Guessing"><p>Challenge encore plus ouf</p>
-<span>200</span>
-<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
-</div>
-<div class="pure-u pure-button-spacer"></div>
-<div class="l-box pure-u task-button pure-button Guessing"><p>Challenge encore plus ouf</p>
-<span>200</span>
-<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
-</div>
-<div class="pure-u pure-button-spacer"></div>
-<div class="l-box pure-u task-button pure-button Guessing"><p>Challenge encore plus ouf</p>
-<span>200</span>
-<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
-</div>
-</div>
+	<div class="l-box pure-u pure-button Guessing task-button"><p>Challenge de ouf</p>
+	<span>150</span>
+	<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge de ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag toto&quot;}</span>
+	</div>
+	<div class="pure-u pure-button-spacer"></div>
+	<div class="l-box pure-u pure-button Guessing task-button"><p>Challenge encore plus ouf</p>
+	<span>200</span>
+	<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
+	</div>
+	<div class="pure-u pure-button-spacer"></div>
+	<div class="l-box pure-u pure-button Guessing task-button"><p>Challenge encore plus ouf</p>
+	<span>200</span>
+	<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
+	</div>
+	<br/>
+	<div class="l-box pure-u pure-button Guessing task-button solved-button"><p>Challenge encore plus ouf</p>
+	<span>200</span>
+	<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
+	</div>
+	<div class="pure-u pure-button-spacer"></div>
+	<div class="l-box pure-u pure-button Guessing task-button solved-button"><p>Challenge encore plus ouf</p>
+	<span>200</span>
+	<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
+	</div>
+	<div class="pure-u pure-button-spacer"></div>
+	<div class="l-box pure-u pure-button Guessing task-button solved-button"><p>Challenge encore plus ouf</p>
+	<span>200</span>
+	<span class="task-infos" style="display:none">{&quot;name&quot;:&quot;Challenge encore plus ouf&quot;,&quot;author&quot;:&quot;agix&quot;,&quot;type&quot;:&quot;Guessing&quot;,&quot;description&quot;:&quot;Resoudre ce challenge avec le flag tata&quot;}</span>
+	</div>
+	</div>
 </div>
 </div>
 <div id="hideshow" style="visibility: hidden;">
@@ -70,6 +69,65 @@
 </div>
 </div>
 </div>
+<script>
+
+    var canvas = document.getElementById("padcanvas");
+
+
+	// create an new instance of a pixi stage
+	var stage = new PIXI.Stage(0x4d0d0f);
+
+	// create a renderer instance
+	var renderer = new PIXI.autoDetectRenderer(450, 500, canvas);//autoDetectRenderer(400, 300);
+
+	var texture = PIXI.Texture.fromImage("img/logo-test.png");
+	var background = new PIXI.Sprite(texture);
+
+	background.anchor.x = 0.5;
+	background.anchor.y = 0.5;
+
+	background.position.x = 175;
+	background.position.y = 250;
+
+	stage.addChild(background);
+
+	var texture = PIXI.Texture.fromImage("img/spot.png");
+	var left_spot = new PIXI.Sprite(texture);
+	var right_spot = new PIXI.Sprite(texture);
+
+	left_spot.anchor.x = 0.5;
+	left_spot.anchor.y = 1;
+	right_spot.anchor.x = 0.5;
+	right_spot.anchor.y = 1;
+
+	left_spot.position.x = 60;
+	left_spot.position.y = 480;
+	right_spot.position.x = 290;
+	right_spot.position.y = 480;
+
+	stage.addChild(left_spot);
+	stage.addChild(right_spot);
+
+	var	myfunc = animate;
+	var anim;
+
+    var rotation = 0.002
+	function animate() {
+	    anim = requestAnimFrame( animate );
+	    left_spot.rotation += rotation;
+	    right_spot.rotation -= rotation;
+	    if (left_spot.rotation >= 0.45) {
+	    	rotation = -0.002;
+	    }
+	    if (left_spot.rotation <= 0.0) {
+	    	rotation = +0.002;
+	    }
+	    renderer.render(stage);
+	}
+
+	requestAnimFrame( animate );
+
+</script>
 <script src="https://dl0kbifbyxlj5.cloudfront.net/js/pad.js?etag=OX6fEpwY"></script><script src="https://dl0kbifbyxlj5.cloudfront.net/js/message.js?etag=pGOp22MT"></script><script>function decodeHtml(html) {
     var txt = document.createElement("textarea");
     txt.innerHTML = html;

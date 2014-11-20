@@ -59,12 +59,6 @@ body {
     top:-20px;
 }
 
-.task-button {
-    background-image: url("../img/snow.jpg");
-    width: 23%;
-    margin-bottom:10px;
-}
-
 h1,
 h2,
 h3,
@@ -129,7 +123,7 @@ label {
  * I want my pure-button elements to look a little different
  */
 .pure-button {
-    background-color: #6a6a6a;
+    background-color: #000000;
     color: white;
     padding: 0.4em 1em;
     border-radius: 5px;
@@ -162,6 +156,27 @@ a.pure-button-primary {
     font-size: 120%;
 }
 
+.task-button {
+    width: 23%;
+    margin-bottom:10px;
+}
+
+.task-button:hover {
+    background-image: url("../img/tv-countdown.gif");
+    width: 23%;
+    margin-bottom:10px;
+}
+
+.solved-button {
+    width: 23%;
+    margin-bottom:10px;
+}
+
+.solved-button:hover {
+    background-image: url("../img/tv-noise.gif");
+    width: 23%;
+    margin-bottom:10px;
+}
 
 /*
  * -- MENU STYLES --
@@ -181,7 +196,7 @@ a.pure-button-primary {
     background-image: url("../img/banner.png");
     background-repeat: no-repeat;
     background-size: 432px;
-    background-position: center;
+    background-position: left;
     max-height: 64px;
     background-color: #000000;
     border-bottom: none;
@@ -229,11 +244,11 @@ a.pure-button-primary {
 
 .splash {
     /* absolute center .splash within .splash-container */
-    width: 80%;
+    width: 70%;
     height: 50%;
     margin: auto;
     position: absolute;
-    top: 100px; left: 0; bottom: 0; right: 0;
+    top: 100px; left: 30%; bottom: 0; right: 0;
     text-align: center;
     text-transform: uppercase;
 }
@@ -245,8 +260,8 @@ a.pure-button-primary {
 }
 
 #pad {
-    min-width:900px;
-    width: 80%;
+    min-width:700px;
+    width: 60%;
     height: 80%;
 }
 
@@ -272,6 +287,20 @@ a.pure-button-primary {
     letter-spacing: 0.05em;
     opacity: 0.8;
 }
+
+
+.splash-canvas {
+    /* absolute center .splash within .splash-container */
+    width: 30%;
+    height: 80%;
+    margin-left: 2%;
+    margin-top: 0.67em;
+    position: absolute;
+    top: 100px; left: 0; bottom: 0; right: 30%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 
 /*
  * -- CONTENT STYLES --
