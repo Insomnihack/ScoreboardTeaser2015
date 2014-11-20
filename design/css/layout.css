@@ -157,24 +157,24 @@ a.pure-button-primary {
 }
 
 .task-button {
-    width: 23%;
+    width: 32%;
     margin-bottom:10px;
 }
 
 .task-button:hover {
     background-image: url("../img/tv-countdown.gif");
-    width: 23%;
+    width: 32%;
     margin-bottom:10px;
 }
 
 .solved-button {
-    width: 23%;
+    width: 32%;
     margin-bottom:10px;
 }
 
 .solved-button:hover {
     background-image: url("../img/tv-noise.gif");
-    width: 23%;
+    width: 32%;
     margin-bottom:10px;
 }
 
@@ -233,7 +233,8 @@ a.pure-button-primary {
 .splash-container {
     background: #4d0d0f;
     z-index: 1;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
     /* The following styles are required for the "scroll-over" effect */
     width: 100%;
     height: 88%;
