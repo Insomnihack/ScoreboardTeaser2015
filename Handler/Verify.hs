@@ -12,20 +12,21 @@ getVerifyR uname k = do
         Nothing -> do
             setMessageI MsgInvalidUserKey
             redirect SubscribeR
-        Just user@(Entity u _) -> if userEmailVerified user
-            then do
-                setMessageI MsgAlreadyVerified
-                redirect HomeR
-            else if userEmailVerifyKey user /= k
+        Just user@(Entity u _) ->
+            if userEmailVerified user
                 then do
-                    setMessageI MsgInvalidUserKey
-                    redirect SubscribeR
-                else do
-                    runAccountDB $ verifyAccount user
-                    let randomStr = filter isAlphaNum $ randomRs ('0','z') $ unsafePerformIO newStdGen
-                    let userChall = T.append ("user"::T.Text) $ T.pack $ take 6 $ randomStr
-                    let userPwd = T.pack $ take 10 $ drop 1337 randomStr
-                    runDB $ update u [TeamChalluser =. userChall, TeamChallpwd =. userPwd ]
-                    setMessageI MsgWelcomeRegistered
+                    setMessageI MsgAlreadyVerified
                     redirect HomeR
-                    where isAlphaNum x = x `elem` (['a','b'..'z']++['0','1'..'9']++['A','B'..'Z'])
+                else if userEmailVerifyKey user /= k
+                    then do
+                        setMessageI MsgInvalidUserKey
+                        redirect SubscribeR
+                    else do
+                        runAccountDB $ verifyAccount user
+                        let randomStr = filter isAlphaNum $ randomRs ('0','z') $ unsafePerformIO newStdGen
+                        let userChall = T.append ("user"::T.Text) $ T.pack $ take 6 $ randomStr
+                        let userPwd = T.pack $ take 10 $ drop 1337 randomStr
+                        runDB $ update u [TeamChalluser =. userChall, TeamChallpwd =. userPwd ]
+                        setMessageI MsgWelcomeRegistered
+                        redirect HomeR
+                        where isAlphaNum x = x `elem` (['a','b'..'z']++['0','1'..'9']++['A','B'..'Z'])

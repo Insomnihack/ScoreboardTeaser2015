@@ -4,6 +4,8 @@ import Import
 
 getMyLogoutR :: Handler Html
 getMyLogoutR = do
-              deleteSession "teamName"
-              clearCreds True
-              redirect HomeR
+    deleteSession "teamName"
+    deleteSession "challUser"
+    deleteSession "challPwd"
+    clearCreds True
+    redirect HomeR

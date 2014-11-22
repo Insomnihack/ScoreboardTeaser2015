@@ -26,6 +26,6 @@ getGetMessagesR =
                     "time" .= (messageTimestamp msg),
                     "script" .= (messageScript msg),
                     "msg" .= (messageMessage msg),
-                    "title" .= (messageTitle msg)
-                ]] ++ (toObject xs)
+                    "title" .= (messageTitle msg)]]
+                ++ (toObject xs)
 
