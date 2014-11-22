@@ -7,10 +7,20 @@ function decodeHtml(html) {
 var msg = decodeHtml(#{toJSON msg});
 
 if (msg != ""){
-  var msgDiv = document.getElementById("message");
-  msgDiv.textContent = msg;
-  msgDiv.style.display = "block";
+    var msgDiv = document.getElementById("message");
+    msgDiv.textContent = msg;
+    msgDiv.style.display = "block";
 }
+
+window.addEventListener('focus', function() {
+    Focus = true;
+});
+
+window.addEventListener('blur', function() {
+    Focus = false;
+});
+
+Focus = true;
 
 CacheRoot = #{toJSON $ Settings.cacheRoot $ settings master}
 StaticRoot = #{toJSON $ Settings.staticRoot $ settings master}

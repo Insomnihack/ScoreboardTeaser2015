@@ -112,7 +112,7 @@ window.addEventListener('load', function(){
   }
 
   refreshScore(solveTask, true);
-  window.setInterval(function () {refreshScore(solveTask, false)}, 1000*60);
+  window.setInterval(function () { if(Focus) { refreshScore(solveTask, false)} }, 1000*60);
 
 });
 

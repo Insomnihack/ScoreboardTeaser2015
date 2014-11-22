@@ -75,5 +75,5 @@ function loadHTMLMessages(object, execNewEvent){
 
 window.addEventListener('load', function(){
     getMessages(loadHTMLMessages, false, true);
-    window.setInterval(function () {getMessages(loadHTMLMessages, true, false)}, 5000);
+    window.setInterval(function () { if(Focus) { getMessages(loadHTMLMessages, true, false)} }, 5000);
 });
