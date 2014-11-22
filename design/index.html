@@ -97,7 +97,10 @@ loadImages(function(images) {
   	var canvas = document.getElementById("padcanvas");
   	var angles=[0,0];
   	var clocks=[true,false];
-  	var interval=0.25
+  	var interval=0.5;
+  	var maxin = 30;
+  	var maxout = 5;
+  	var frameinterval = 50;
   	moveSpot = setInterval(function(){
 	  	draw(canvas, images, angles);
 	  	for(i=0;i<clocks.length;i++){
@@ -106,15 +109,15 @@ loadImages(function(images) {
 	  		else
 	  			angles[i]-=interval;
 	  	}
-	  	if(angles[0]>=45)
+	  	if(angles[0]>=maxin)
 		  	clocks[0]=0;
-		if(angles[0]<=-15)
+		if(angles[0]<=-maxout)
 	  		clocks[0]=1;
-	  	if(angles[1]>=15)
+	  	if(angles[1]>=maxout)
 		  	clocks[1]=0;
-		 if(angles[1]<=-45)
+		 if(angles[1]<=-maxin)
 	  		clocks[1]=1;
-  	}, 20);
+  	}, frameinterval);
 });
 
 function draw(canvas, images, angles){
