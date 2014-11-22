@@ -95,22 +95,29 @@ function loadImages(callback) {
 
 loadImages(function(images) {
   	var canvas = document.getElementById("padcanvas");
-  	var angle=0;
-  	var clock=1;
+  	var angles=[0,0];
+  	var clocks=[true,false];
+  	var interval=0.25
   	moveSpot = setInterval(function(){
-	  	draw(canvas, images, angle);
-	  	if(clock)
-	  		angle+=1;
-	  	else
-	  		angle-=1;
-	  	if(angle>=45)
-	  		clock=0;
-	  	if(angle<=-45)
-	  		clock=1;
+	  	draw(canvas, images, angles);
+	  	for(i=0;i<clocks.length;i++){
+	  		if(clocks[i])
+	  			angles[i]+=interval;
+	  		else
+	  			angles[i]-=interval;
+	  	}
+	  	if(angles[0]>=45)
+		  	clocks[0]=0;
+		if(angles[0]<=-15)
+	  		clocks[0]=1;
+	  	if(angles[1]>=15)
+		  	clocks[1]=0;
+		 if(angles[1]<=-45)
+	  		clocks[1]=1;
   	}, 20);
 });
 
-function draw(canvas, images, angle){
+function draw(canvas, images, angles){
   	var ctx = canvas.getContext("2d");
   	ctx.clearRect(0,0,document.getElementById("padcanvas").width,document.getElementById("padcanvas").height);
  	ctx.drawImage(images.logo,0,0);
@@ -118,13 +125,13 @@ function draw(canvas, images, angle){
  	var low = 60
 
  	ctx.save();
-  	ctx.translate(100/2+20,370);
-  	ctx.rotate(angle*Math.PI/180);
+  	ctx.translate(100/2+20,450);
+  	ctx.rotate(angles[0]*Math.PI/180);
  	ctx.drawImage(images.spot,-50,-340);
  	ctx.restore();
  	ctx.save();
-	ctx.translate(100/2+20+images.logo.width-130,370);
-  	ctx.rotate(angle*Math.PI/180);
+	ctx.translate(100/2+images.logo.width-130,450);
+  	ctx.rotate(angles[1]*Math.PI/180);
   	ctx.drawImage(images.spot,-50,-340);
  	ctx.restore();
 
