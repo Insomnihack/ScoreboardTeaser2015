@@ -11,6 +11,7 @@
 body {
     line-height: 1.7em;
     color: #7f8c8d;
+    background-color: black;
     font-size: 13px;
 }
 
@@ -238,8 +239,6 @@ a.pure-button-primary {
     /* The following styles are required for the "scroll-over" effect */
     width: 100%;
     height: 88%;
-    top: 0;
-    left: 0;
     position: fixed !important;
 }
 
@@ -292,14 +291,11 @@ a.pure-button-primary {
 
 .splash-canvas {
     /* absolute center .splash within .splash-container */
-    width: 30%;
-    height: 80%;
-    margin-left: 2%;
-    margin-top: 0.67em;
+    margin-left: 3%;
+    margin-top: 5%;
     position: absolute;
-    top: 100px; left: 0; bottom: 0; right: 30%;
     text-align: center;
-    text-transform: uppercase;
+    height: 90%;
 }
 
 
