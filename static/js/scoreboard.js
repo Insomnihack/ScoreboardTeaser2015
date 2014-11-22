@@ -31,7 +31,10 @@ function extractName(solvedTask){
 function genCase(line, task, size){
   var hcase = document.createElement("div");
   hcase.classList.add("l-box");
-  hcase.classList.add("pure-u-1-"+size);
+  hcase.classList.add("pure-u");
+  hcase.classList.add("is-center");
+  console.log(size);
+  hcase.style.width=1/size*100+"%";
   var pcontent = document.createElement("p");
   var content = document.createTextNode(task);
   pcontent.appendChild(content);
@@ -39,15 +42,15 @@ function genCase(line, task, size){
   line.appendChild(hcase);
 }
 
-function genCaseTeam(line, task, country, size){
+function genCaseCountry(line, country, size){
   var hcase = document.createElement("div");
   hcase.classList.add("l-box");
-  hcase.classList.add("pure-u-1-"+size);
+  hcase.classList.add("pure-u");
+  hcase.classList.add("is-center");
+  hcase.style.width=1/size*100+"%";
   var pcontent = document.createElement("p");
-  var content = document.createTextNode(task);
   var img = document.createElement('img');
-  img.src = country
-  pcontent.appendChild(content);
+  img.src = StaticRoot+'/img/flags/'+country;
   pcontent.appendChild(img);
   hcase.appendChild(pcontent);
   line.appendChild(hcase);
@@ -56,7 +59,9 @@ function genCaseTeam(line, task, country, size){
 function genTaskCase(line, task, solvedTasks, size){
   var bcase = document.createElement("div");
   bcase.classList.add("l-box");
-  bcase.classList.add("pure-u-1-"+size);
+  bcase.classList.add("pure-u");
+  bcase.classList.add("is-center");
+  bcase.style.width=1/size*100+"%";
   var pcontent = document.createElement("p");
 
   if((n=solvedTasks.map(extractName).indexOf(task))!=-1){
@@ -75,7 +80,8 @@ function headerTasks(body, arrayTasks){
   var header = document.createElement("div");
   header.classList.add("pure-g");
   genCase(header, "Teams", arrayTasks.length+2);
-  genCase(header, "Score", arrayTasks.length+2);
+  genCase(header, "Country", (arrayTasks.length+2)*2);
+  genCase(header, "Score", (arrayTasks.length+2)*2);
   arrayTasks.map(function(x) { return genCase(header, x, arrayTasks.length+2); })
   body.appendChild(header);
 }
@@ -83,8 +89,9 @@ function headerTasks(body, arrayTasks){
 function genScoreboard(body, team, tasks){
   var line = document.createElement("div");
   line.classList.add("pure-g");
-  genCaseTeam(line, '#'+team.pos+' - '+team.team+' - ', StaticRoot+'/img/flags/'+team.country, tasks.length+2);
-  genCase(line, team.score, tasks.length+2);
+  genCase(line, '#'+team.pos+' - '+team.team, tasks.length+2);
+  genCaseCountry(line, team.country, (tasks.length+2)*2);
+  genCase(line, team.score, (tasks.length+2)*2);
   tasks.map(function(x) { return genTaskCase(line, x, team.taskStats, tasks.length+2); });
   body.appendChild(line);
 }
