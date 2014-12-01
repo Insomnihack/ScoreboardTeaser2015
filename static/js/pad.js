@@ -36,7 +36,7 @@ function refreshScore(callback, neverDrawn){
         teamStatus.appendChild(challUser);
         teamStatus.appendChild(br3);
         teamStatus.appendChild(challPwd);
-        var tasks = document.getElementsByClassName("pure-button");
+        var tasks = document.getElementsByClassName("my-pure-button");
         for(i=0;i<tasks.length;i++){
           var infos = JSON.parse(tasks[i].children[2].textContent);
           if((n=data.solved.map(extractName).indexOf(infos.name))!=-1){
@@ -101,6 +101,77 @@ function solvedEvent(){
 }
 
 window.addEventListener('load', function(){
+  function loadImages(callback) {
+  var images = {};
+  var sources = {
+      logo: 'logo-test.png',
+      spot: 'spot.png',
+    };
+    var loadedImages = 0;
+    var numImages = 0;
+    for(var src in sources) {
+      numImages++;
+    }
+    for(var src in sources) {
+      images[src] = new Image();
+      images[src].onload = function() {
+          if(++loadedImages >= numImages) {
+            callback(images);
+          }
+      };
+    images[src].src = StaticRoot+'/img/'+sources[src];
+    }
+}
+
+
+  loadImages(function(images) {
+    var canvas = document.getElementById("padcanvas");
+    var angles=[0,0];
+    var clocks=[true,false];
+    var interval=0.5;
+    var maxin = 30;
+    var maxout = 5;
+    var frameinterval = 50;
+    var moveSpot = setInterval(function(){
+      if(Focus){
+        draw(canvas, images, angles);
+        for(i=0;i<clocks.length;i++){
+          if(clocks[i])
+            angles[i]+=interval;
+          else
+            angles[i]-=interval;
+        }
+        if(angles[0]>=maxin)
+          clocks[0]=0;
+      if(angles[0]<=-maxout)
+          clocks[0]=1;
+        if(angles[1]>=maxout)
+          clocks[1]=0;
+      if(angles[1]<=-maxin)
+          clocks[1]=1;
+      }
+    }, frameinterval);
+  });
+
+  function draw(canvas, images, angles){
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0,0,document.getElementById("padcanvas").width,document.getElementById("padcanvas").height);
+    ctx.drawImage(images.logo,0,0);
+
+    var low = 60
+
+    ctx.save();
+    ctx.translate(100/2+20,450);
+    ctx.rotate(angles[0]*Math.PI/180);
+    ctx.drawImage(images.spot,-50,-340);
+    ctx.restore();
+    ctx.save();
+    ctx.translate(100/2+images.logo.width-130,450);
+    ctx.rotate(angles[1]*Math.PI/180);
+    ctx.drawImage(images.spot,-50,-340);
+    ctx.restore();
+  }
+
   var tasks = document.getElementsByClassName("task-button");
   var exit = document.getElementById("exit");
   var submit = document.getElementById("submitFlag");
