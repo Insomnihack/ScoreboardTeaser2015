@@ -128,6 +128,10 @@ label {
     height: auto;
 }
 
+img {
+    vertical-align: middle;
+}
+
 .errors {
     display:none;
 }
@@ -136,11 +140,12 @@ label {
  * These are some useful classes which I will need
  */
 .l-box {
-    padding: 1em;
+    padding: 4px 1em;
 }
 
 .l-box p {
-    word-wrap: break-word
+    word-wrap: break-word;
+    margin: 0;
 }
 
 .l-box-lrg {
@@ -218,12 +223,14 @@ label {
 }
 
 .pure-button{
-    background-color: #c72127;
+    background-color: #000000;
+    font-weight: bold;
     color: white;
 }
 
 .pure-button-primary{
-    background-color: #4d0d0f;
+    background-color: #000000;
+    font-weight: bold;
 }
 
 a.pure-button-primary {
