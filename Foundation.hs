@@ -152,8 +152,8 @@ instance Yesod App where
         -- you to use normal widget features in default-layout.
 
         pc <- widgetToPageContent $ do
-            addStylesheetRemote "https://cdn.rawgit.com/yahoo/pure-release/v0.5.0/pure-min.css"
-            addStylesheetRemote "https://cdn.rawgit.com/yahoo/pure-release/v0.5.0/grids-responsive-min.css"
+            addStylesheet $ StaticR css_pure_min_css
+            addStylesheet $ StaticR css_grids_responsive_min_css
             addStylesheet $ StaticR css_layout_css
             addStylesheet $ StaticR css_purealert_css
             $(widgetFile "default-layout")

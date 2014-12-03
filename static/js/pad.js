@@ -24,18 +24,15 @@ function refreshScore(callback, neverDrawn){
       if(sessionStorage.getItem("cachedEtagPad") != etag || neverDrawn){
         sessionStorage.setItem("cachedEtagPad", etag);
         data = JSON.parse(requestScore.responseText);
-        var teamStatus = document.getElementById("teamstatus");
+        var br = document.createElement('br');
+        var teamStatus = document.getElementById("score");
         teamStatus.textContent=data.teamName+" - "+data.score+"PTS"
-        var br1 = document.createElement("br");
-        var br2 = document.createElement("br");
-        var br3 = document.createElement("br");
-        teamStatus.appendChild(br1);
-        teamStatus.appendChild(br2);
+        var teamIds = document.getElementById("ids");
         var challUser = document.createTextNode("Username : "+data.challUser);
         var challPwd = document.createTextNode("Password : "+data.challPwd);
-        teamStatus.appendChild(challUser);
-        teamStatus.appendChild(br3);
-        teamStatus.appendChild(challPwd);
+        teamIds.appendChild(challUser);
+        teamIds.appendChild(br);
+        teamIds.appendChild(challPwd);
         var tasks = document.getElementsByClassName("my-pure-button");
         for(i=0;i<tasks.length;i++){
           var infos = JSON.parse(tasks[i].children[2].textContent);
@@ -56,14 +53,21 @@ function refreshScore(callback, neverDrawn){
   requestScore.send();
 }
 
+function closeTV(){
+  var divInfos = document.getElementById("infosTask");
+  divInfos.children[0].innerHTML = "";
+  document.getElementById('hideshow').style.visibility='hidden';
+}
+
 function taskInfos(){
   var infos = JSON.parse(this.children[2].textContent);
   document.getElementById('hideshow').style.visibility = 'visible';
   var divInfos = document.getElementById("infosTask");
-  divInfos.children[1].textContent = infos.name;
+  divInfos.children[1].children[0].textContent = infos.name+' - '+infos.type+' - '+infos.value+' pts - realised by '+infos.author;
   var flag = document.getElementById("flag")
   flag.value="";
   flag.focus();
+  divInfos.children[0].innerHTML = '<iframe id="ytplayer" type="text/html" width="640" height="390" src="'+infos.youtube+'" frameborder="0"/>';
   divInfos.children[2].innerHTML = infos.description;
   divInfos.children[4].value = infos.name;
 }
@@ -79,7 +83,7 @@ function submitFlag(){
       data = JSON.parse(requestFlag.responseText);
       document.getElementById("flag").value=data.status;
       if(data.status=="ok"){
-        document.getElementById('hideshow').style.visibility='hidden';
+        closeTV();
         eval(data.event);
         refreshScore(solveTask);
       }
@@ -174,9 +178,9 @@ window.addEventListener('load', function(){
 
   var tasks = document.getElementsByClassName("task-button");
   var exit = document.getElementById("exit");
-  var submit = document.getElementById("submitFlag");
-  submit.addEventListener("click", submitFlag, false);
-  exit.addEventListener("click", function(){ document.getElementById('hideshow').style.visibility='hidden';}, false);
+  exit.addEventListener("click", function(){
+    closeTV();
+  }, false);
 
   for(i=0;i<tasks.length;i++){
     tasks[i].addEventListener("click", taskInfos, false);
@@ -189,7 +193,7 @@ window.addEventListener('load', function(){
 
 window.addEventListener("keydown", function(e){
   if(e.keyCode === 27){
-    document.getElementById('hideshow').style.visibility='hidden';
+    closeTV();
   }
   else if(e.keyCode === 13){
     if(document.getElementById('hideshow').style.visibility=='visible'){

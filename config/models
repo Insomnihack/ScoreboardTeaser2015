@@ -13,6 +13,7 @@ Team
     deriving Typeable
 Task
     name Text
+    youtube Text
     description Text
     type Text
     flag ByteString

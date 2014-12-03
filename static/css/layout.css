@@ -10,9 +10,58 @@
  */
 body {
     line-height: 1.7em;
-    color: #7f8c8d;
+    color: white;
     font-size: 13px;
     background-color: #4d0d0f;
+}
+
+#teamstatus div{
+    display:inline-block;
+}
+
+#teamstatus #score{
+    margin-right: 100px;
+    vertical-align: super;
+}
+
+#teamstatus #ids{
+    margin-left: 100px;
+}
+
+
+#news .content-subhead{
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+#news .l-box{
+    text-align:center;
+}
+
+#news h4.content-subhead{
+    font-size: 0.8em;
+}
+
+#scoreboard .pure-g .pure-u{
+    vertical-align: middle;
+}
+
+#scoreboard .pure-g{
+    border: 1px solid white;
+    display: block;
+}
+
+#scoreboard .pure-g:first-child{
+    font-weight: bold;
+}
+
+#exit {
+    text-align:center;
+}
+
+#exit img{
+    margin-top: 15px;
+    cursor: pointer;
 }
 
 #hideshow {
@@ -25,28 +74,32 @@ body {
 .popup_block {
     background:#000;
     padding: 1px 10px;
-    border: 0px;
+    border:1px solid white;
+    border-radius: 10px;
     float:left;
-    width: 512px;
+    min-width: 700px;
     position:fixed;
-    top:20%;
-    left:50%;
+    top:5%;
+    left:45%;
     margin:0 0 0 -250px;
     z-index:100;
 }
 .popup_block .popup {
     float:left;
     width:100%;
-    background:#fff;
+    border-radius: 10px;
+    background:black;
     margin:10px 0;
-    padding:10px 0;
-    border:1px solid #bbb;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    border:1px solid white;
 }
 
 .popup h3 {
-    margin:0 0 20px;
-    padding:5px 10px;
-    border-bottom:1px solid #bbb;
+    text-align: center;
+    margin-top:0px;
+    margin-bottom:0px;
     font-size:1.5em;
     font-weight:normal;
 }
@@ -181,22 +234,22 @@ a.pure-button-primary {
 }
 
 .task-button {
-    width: 32%;
+    width: 31%;
     margin-bottom:10px;
 }
 
 .task-button:hover {
-    width: 32%;
+    width: 31%;
     margin-bottom:10px;
 }
 
 .solved-button {
-    width: 32%;
+    width: 31%;
     margin-bottom:10px;
 }
 
 .solved-button:hover {
-    width: 32%;
+    width: 31%;
     margin-bottom:10px;
 }
 /*

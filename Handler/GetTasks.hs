@@ -18,6 +18,7 @@ getGetTasksR = do
         where
             extractValues (Entity _ task) =
                 object ["name" .= (taskName task),
+                        "youtube" .= (taskYoutube task),
                         "description" .= (taskDescription task),
                         "type" .= (taskType task),
                         "points" .= (taskValue task),
