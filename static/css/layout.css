@@ -78,6 +78,7 @@ body {
     border-radius: 10px;
     float:left;
     min-width: 700px;
+    width: 0px;
     position:fixed;
     top:5%;
     left:45%;
@@ -189,7 +190,7 @@ img {
     background-size: 100% 100%;
     min-width: 200px;
     min-height: 128px;
-
+    padding-top: 30px;
     display:inline-block;
     *display:inline;
     zoom:1;
