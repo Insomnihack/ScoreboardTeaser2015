@@ -4,43 +4,44 @@ import Import
 import MyAuth
 import qualified Data.Text as T
 
+renderForm :: (RenderMessage (HandlerSite m) FormMessage, MonadHandler m) =>
+              AForm (HandlerT (HandlerSite m) IO) a
+              -> m ((FormResult a,
+                     WidgetT (HandlerSite m) IO ()),
+                    Enctype)
+renderForm = liftHandlerT . runFormPost . renderDivs
+
 getSubscribeR :: Handler Html
 getSubscribeR = do
-                  ((_, newAccountWidget), enctypeAccount) <- liftHandlerT $ runFormPost $ renderDivs newAccountForm
-                  ((_, myResetPasswordWidget), enctypeReset) <- liftHandlerT $ runFormPost $ renderDivs myResetPasswordForm
-                  ((_, resendVerifyWidget), enctypeResend) <- liftHandlerT $ runFormPost $ renderDivs resendVerifyForm
-                  defaultLayout $(widgetFile "subscribe")
+    ((_, newAccountWidget), enctypeAccount)    <- renderForm newAccountForm
+    ((_, myResetPasswordWidget), enctypeReset) <- renderForm myResetPasswordForm
+    ((_, resendVerifyWidget), enctypeResend)   <- renderForm resendVerifyForm
+    defaultLayout $(widgetFile "subscribe")
 
 postSubscribeR :: Handler Html
 postSubscribeR = do
-                    msgr <- getMessageRender
-                    ((result, newAccountWidget), enctypeAccount) <- liftHandlerT $ runFormPost $ renderDivs newAccountForm
-                    ((_, myResetPasswordWidget), enctypeReset) <- liftHandlerT $ runFormPost $ renderDivs myResetPasswordForm
-                    ((_, resendVerifyWidget), enctypeResend) <- liftHandlerT $ runFormPost $ renderDivs resendVerifyForm
-                    mdata <- case result of
-                      FormFailure msg -> return $ Left msg
-                      FormSuccess (NewAccountData u email pwd pwd2) -> do
-                        if pwd == pwd2
-                          then do
-                              key <- newVerifyKey
-                              hashed <- hashPassword pwd
-                              mnew <- runAccountDB $ addNewUser u email key hashed
-                              case mnew of
-                                Left err -> do
-                                  $(logWarn) err
-                                  return $ Left [msgr MsgTeamMailExist]
-                                Right _ -> do return $ Right $ (u, email, key)
-                          else return $ Left [msgr MsgPasswordsMissmatch]
-                      x -> do
-                        $(logWarn) $ T.pack $ show x
-                        return $ Left [msgr MsgUnknownForm]
+    ((result, newAccountWidget), enctypeAccount) <- renderForm newAccountForm
+    ((_, myResetPasswordWidget), enctypeReset)   <- renderForm myResetPasswordForm
+    ((_, resendVerifyWidget), enctypeResend)     <- renderForm resendVerifyForm
+    case result of
+        FormFailure msg -> setMessage $ toHtml $ T.intercalate (T.pack ", ") msg
+        FormSuccess (NewTeamData team email country pwd pwd2) ->
+            if pwd /= pwd2
+                then setMessageI MsgPasswordsMissmatch
+                else do
+                    key     <- newVerifyKey
+                    hashed  <- hashPassword pwd
+                    mnew    <- runAccountDB $ addNewUser team email key hashed
+                    case mnew of
+                        Left err -> do
+                            $(logWarn) err
+                            setMessageI MsgTeamMailExist
+                        Right (Entity new _) -> do
+                            runDB $ update new [TeamCountry =. country]
+                            render <- getUrlRender
+                            sendVerifyEmail team email $ render $ VerifyR team key
+        x -> do
+            $(logWarn) $ T.pack $ show x
+            setMessageI MsgUnknownForm
 
-                    case mdata of
-                      Left errs -> do setMessage $ toHtml $ T.intercalate (T.pack ", ") errs
-                      Right (user, email, key) -> do
-                        render <- getUrlRender
-                        sendVerifyEmail user email $ render $ VerifyR user key
-                        -- setMessageI MsgValidationLink
-
-                    defaultLayout $(widgetFile "subscribe")
-
+    defaultLayout $(widgetFile "subscribe")

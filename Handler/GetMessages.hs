@@ -2,6 +2,7 @@ module Handler.GetMessages where
 
 import Import
 import MyFunc
+import Data.Time.Clock.POSIX
 import qualified Data.Text as T (Text, pack)
 
 getGetMessagesR :: Handler Value
@@ -23,9 +24,9 @@ getGetMessagesR =
             toObject [] = []
             toObject ((Entity _ msg):xs) =
                 [object [
-                    "time" .= (messageTimestamp msg),
+                    "time" .= (round $ utcTimeToPOSIXSeconds $ messageTimestamp msg :: Int),
                     "script" .= (messageScript msg),
                     "msg" .= (messageMessage msg),
-                    "title" .= (messageTitle msg)
-                ]] ++ (toObject xs)
+                    "title" .= (messageTitle msg)]]
+                ++ (toObject xs)
 

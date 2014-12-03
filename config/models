@@ -7,11 +7,13 @@ Team
     resetkey Text
     challuser Text
     challpwd Text
+    country Text
     UniqueTeamEmail email
     UniqueTeamLogin login
     deriving Typeable
 Task
     name Text
+    youtube Text
     description Text
     type Text
     flag ByteString

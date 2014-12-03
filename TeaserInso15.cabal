@@ -21,6 +21,7 @@ library
                      Settings.Development
                      MyAuth
                      MyFunc
+                     Flags
                      Handler.Home
                      Handler.Scoreboard
                      Handler.Subscribe

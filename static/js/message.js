@@ -28,22 +28,31 @@ function genMessage(body, news){
   m.classList.add("pure-u-1-4");
   var t = document.createElement("h3");
   t.classList.add("content-subhead");
+  var t2 = document.createElement("h4");
+  t2.classList.add("content-subhead");
   var i = document.createElement("i");
   i.classList.add("fa");
   i.classList.add("fa-rocket");
   var p = document.createElement("p");
-  var contentTitle = document.createTextNode(news.title+' - '+news.time);
+  var d = new Date(news.time*1000);
+  var contentTitle = document.createTextNode(news.title);
+  var contentDate = document.createTextNode(d.toLocaleString());
   var content = document.createTextNode(news.msg);
 
-  i.appendChild(contentTitle);
-  t.appendChild(i);
+  i.appendChild(contentDate);
+  t2.appendChild(i);
+
+
+  t.appendChild(contentTitle);
   m.appendChild(t);
+  m.appendChild(t2);
 
   p.appendChild(content);
   m.appendChild(p);
 
     if(news.script!=""){
         var b = document.createElement("button");
+        b.classList.add("pure-button");
         var bContent = document.createTextNode("Play");
         b.addEventListener("click", function(x) { eval(news.script) }, false)
         b.appendChild(bContent);
@@ -75,5 +84,5 @@ function loadHTMLMessages(object, execNewEvent){
 
 window.addEventListener('load', function(){
     getMessages(loadHTMLMessages, false, true);
-    window.setInterval(function () {getMessages(loadHTMLMessages, true, false)}, 5000);
+    window.setInterval(function () { if(Focus) { getMessages(loadHTMLMessages, true, false)} }, 5000);
 });

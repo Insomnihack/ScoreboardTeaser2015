@@ -13,6 +13,11 @@ $newline never
         <meta name="author" content="">
 
         <meta name="viewport" content="width=device-width,initial-scale=1">
+        <style>
+            .my-pure-button, .my-pure-button:hover, .my-pure-button-hover { background-image: url("#{Settings.staticRoot $ settings master}/img/tv.png"); }
+            .task-button:hover { background-image: url("#{Settings.staticRoot $ settings master}/img/tv-countdown.gif"); }
+            .solved-button:hover { background-image: url("#{Settings.staticRoot $ settings master}/img/tv-noise.gif"); }
+            .pure-menu.pure-menu-open.pure-menu-fixed { background-image: url("#{Settings.staticRoot $ settings master}/img/banner.png"); }
 
         ^{pageHead pc}
 
@@ -25,7 +30,6 @@ $newline never
     <body>
         <div .header>
             <div .home-menu .pure-menu .pure-menu-open .pure-menu-horizontal .pure-menu-fixed>
-                <a .pure-menu-heading href=@{HomeR}>#{extraCopyright $ appExtra $ settings master}
                 <ul>
                     $if (==) (show $ Just HomeR) (show currRoute)
                         <li .pure-menu-selected>
