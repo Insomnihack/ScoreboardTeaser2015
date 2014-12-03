@@ -28,6 +28,7 @@ function refreshScore(callback, neverDrawn){
         var teamStatus = document.getElementById("score");
         teamStatus.textContent=data.teamName+" - "+data.score+"PTS"
         var teamIds = document.getElementById("ids");
+        teamIds.textContent = "";
         var challUser = document.createTextNode("Username : "+data.challUser);
         var challPwd = document.createTextNode("Password : "+data.challPwd);
         teamIds.appendChild(challUser);
