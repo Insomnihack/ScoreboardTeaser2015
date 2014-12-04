@@ -16,7 +16,9 @@ getSubscribeR = do
     ((_, newAccountWidget), enctypeAccount)    <- renderForm newAccountForm
     ((_, myResetPasswordWidget), enctypeReset) <- renderForm myResetPasswordForm
     ((_, resendVerifyWidget), enctypeResend)   <- renderForm resendVerifyForm
-    defaultLayout $(widgetFile "subscribe")
+    defaultLayout $ do
+        setTitleI MsgSubscribeTitle
+        $(widgetFile "subscribe")
 
 postSubscribeR :: Handler Html
 postSubscribeR = do
@@ -44,4 +46,6 @@ postSubscribeR = do
             $(logWarn) $ T.pack $ show x
             setMessageI MsgUnknownForm
 
-    defaultLayout $(widgetFile "subscribe")
+    defaultLayout $ do
+        setTitleI MsgSubscribeTitle
+        $(widgetFile "subscribe")
