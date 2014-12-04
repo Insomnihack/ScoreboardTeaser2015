@@ -22,7 +22,7 @@
   <div .popup_block>
     <div .popup #infosTask>
       <p>
-      <marquee>
+      <center>
         <h3>
       <p>
       <center>

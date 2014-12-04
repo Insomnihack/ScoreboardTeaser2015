@@ -33,7 +33,7 @@ function genCase(line, task, size){
   hcase.classList.add("l-box");
   hcase.classList.add("pure-u");
   hcase.classList.add("is-center");
-  hcase.style.width=1/size*90+"%";
+  hcase.style.width=size;
   var pcontent = document.createElement("p");
   var content = document.createTextNode(task);
   pcontent.appendChild(content);
@@ -46,7 +46,7 @@ function genCaseCountry(line, country, size){
   hcase.classList.add("l-box");
   hcase.classList.add("pure-u");
   hcase.classList.add("is-center");
-  hcase.style.width=1/size*90+"%";
+  hcase.style.width=size;
   var pcontent = document.createElement("p");
   var img = document.createElement('img');
   img.src = StaticRoot+'/img/flags/'+country;
@@ -60,26 +60,23 @@ function genTaskCase(line, task, solvedTasks, size){
   bcase.classList.add("l-box");
   bcase.classList.add("pure-u");
   bcase.classList.add("is-center");
-  bcase.style.width=1/size*90+"%";
+  bcase.style.width=size;
   var pcontent = document.createElement("p");
-  var br = document.createElement('br');
   if((n=solvedTasks.map(extractName).indexOf(task))!=-1){
     var img = document.createElement('img');
-    img.src = StaticRoot+'/img/accept.png';
+    img.src = StaticRoot+'/img/solved.png';
     img.alt = "GG";
     var d = new Date(parseInt(solvedTasks[n][task].time)*900);
-    var content = document.createTextNode(d.toLocaleString());
+    img.title = d.toLocaleString();
   }
   else{
     var img = document.createElement('img');
-    img.src = StaticRoot+'/img/cancel.png';
+    img.src = StaticRoot+'/img/nsolved.png';
     img.alt = "TG";
-    var content = document.createTextNode("");
+    img.title= "";
   }
 
   pcontent.appendChild(img);
-  pcontent.appendChild(br);
-  pcontent.appendChild(content);
   bcase.appendChild(pcontent);
   line.appendChild(bcase);
 }
@@ -87,22 +84,22 @@ function genTaskCase(line, task, solvedTasks, size){
 function headerTasks(body, arrayTasks){
   var header = document.createElement("div");
   header.classList.add("pure-g");
-  genCase(header, "Rank", 9);
-  genCase(header, "Team", 9);
-  genCase(header, "Country", 9);
-  genCase(header, "Score", 9);
-  arrayTasks.map(function(x) { return genCase(header, x, 9); })
+  genCase(header, "Rank", "10%");
+  genCase(header, "Team", "10%");
+  genCase(header, "Country", "10%");
+  genCase(header, "Score", "10%");
+  arrayTasks.map(function(x) { return genCase(header, x, (100-40)/arrayTasks.length+"%"); })
   body.appendChild(header);
 }
 
 function genScoreboard(body, team, tasks){
   var line = document.createElement("div");
   line.classList.add("pure-g");
-  genCase(line, team.pos, 9);
-  genCase(line, team.team, 9);
-  genCaseCountry(line, team.country, 9);
-  genCase(line, team.score, 9);
-  tasks.map(function(x) { return genTaskCase(line, x, team.taskStats, 9); });
+  genCase(line, team.pos, "10%");
+  genCase(line, team.team, "10%");
+  genCaseCountry(line, team.country, "10%");
+  genCase(line, team.score, "10%");
+  tasks.map(function(x) { return genTaskCase(line, x, team.taskStats, (100-40)/tasks.length+"%"); });
   body.appendChild(line);
 }
 

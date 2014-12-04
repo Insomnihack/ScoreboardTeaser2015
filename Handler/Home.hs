@@ -12,12 +12,14 @@ getHomeR = do
         Nothing -> do
             ((_, loginWidget), enctype) <- liftHandlerT $ runFormPost $ renderDivs loginForm
             defaultLayout $ do
-              addScript $ StaticR js_message_js
-              $(widgetFile "homepage")
-              $(widgetFile "messages")
+                setTitleI MsgHomeTitle
+                addScript $ StaticR js_message_js
+                $(widgetFile "homepage")
+                $(widgetFile "messages")
         Just _ -> do
             tasks <- runDB $ selectList [TaskOpen ==. True] []
             defaultLayout $ do
+                setTitleI MsgHomeTitle
                 addScript $ StaticR js_pad_js
                 addScript $ StaticR js_message_js
                 $(widgetFile "homepageAuth")

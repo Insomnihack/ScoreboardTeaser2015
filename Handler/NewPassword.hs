@@ -15,7 +15,9 @@ getNewPasswordR uname k = do
             if userResetPwdKey user /= "" && userResetPwdKey user == k
                 then do
                     ((_, myNewPasswordWidget), enctype) <- liftHandlerT $ runFormPost $ renderDivs $ myNewPasswordForm uname k
-                    defaultLayout $(widgetFile "newPassword")
+                    defaultLayout $ do
+                        setTitleI MsgNewPasswordTitle
+                        $(widgetFile "newPassword")
                 else do
                     setMessageI MsgInvalidUserKey
                     redirect SubscribeR

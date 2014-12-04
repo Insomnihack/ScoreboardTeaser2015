@@ -135,6 +135,7 @@ instance Yesod App where
         $(widgetFile "other")
 
     defaultLayout widget = do
+        addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
         master <- getYesod
         mmsg <- getMessage
         msg <- case mmsg of
