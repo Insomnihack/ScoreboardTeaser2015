@@ -108,6 +108,7 @@ instance Yesod App where
     isAuthorized GetTasksR _              = isAuthenticated
     isAuthorized (SubmitFlagR _) _        = isAuthenticated
     isAuthorized GetScoreR _              = isAuthenticated
+    isAuthorized GetTaskIDsR _            = isAuthenticated
 
     isAuthorized _ _                      = return Authorized
 

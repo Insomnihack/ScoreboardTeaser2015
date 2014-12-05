@@ -25,17 +25,8 @@ body {
     /*background-color: black;*/
 }
 
-#teamstatus div{
-    display:inline-block;
-}
-
-#teamstatus #score{
-    margin-right: 100px;
-    vertical-align: super;
-}
-
-#teamstatus #ids{
-    margin-left: 100px;
+#teamstatus {
+    text-align:center;
 }
 
 

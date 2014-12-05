@@ -6,6 +6,25 @@ function extractName(solvedTask){
   return solvedTask.name;
 }
 
+function getTaskIDs(path, callback){
+  requestTaskIDs = new XMLHttpRequest();
+  requestTaskIDs.open('GET', path, true);
+  requestTaskIDs.onload = function() {
+    if (requestTaskIDs.status >= 200 && requestTaskIDs.status < 400){
+      data = JSON.parse(requestTaskIDs.responseText);
+      callback(data);
+    } else{
+        console.log("request status"+requestTaskIDs.status);
+    }
+  };
+
+  requestTaskIDs.onerror = function() {
+    console.log("request error");
+  };
+
+  requestTaskIDs.send();
+}
+
 function solveTask(task, event, infos){
   task.removeEventListener("click", taskInfos, false);
   infos.event = event;
@@ -24,16 +43,8 @@ function refreshScore(callback, neverDrawn){
       if(sessionStorage.getItem("cachedEtagPad") != etag || neverDrawn){
         sessionStorage.setItem("cachedEtagPad", etag);
         data = JSON.parse(requestScore.responseText);
-        var br = document.createElement('br');
-        var teamStatus = document.getElementById("score");
+        var teamStatus = document.getElementById("teamstatus");
         teamStatus.textContent=data.teamName+" - "+data.score+"PTS"
-        var teamIds = document.getElementById("ids");
-        teamIds.textContent = "";
-        var challUser = document.createTextNode("Username : "+data.challUser);
-        var challPwd = document.createTextNode("Password : "+data.challPwd);
-        teamIds.appendChild(challUser);
-        teamIds.appendChild(br);
-        teamIds.appendChild(challPwd);
         var tasks = document.getElementsByClassName("my-pure-button");
         for(i=0;i<tasks.length;i++){
           var infos = JSON.parse(tasks[i].children[2].textContent);

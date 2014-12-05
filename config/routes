@@ -16,4 +16,5 @@
 /submitFlag/#T.Text             SubmitFlagR     POST
 /getScore                       GetScoreR       GET
 /getScoreboard                  GetScoreboardR  GET
-/getMessages GetMessagesR GET
+/getMessages                    GetMessagesR    GET
+/getTaskIDs                     GetTaskIDsR     GET

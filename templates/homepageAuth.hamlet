@@ -5,8 +5,6 @@
        your browser does not support canvas
    <div .pure-u-17-24 #pad>
      <h1 .splash-head #teamstatus>
-       <div #score>
-       <div #ids>
      <p #message .pure-alert style="display:none">
      <div .pure-g>
        $forall Entity _ task <- tasks

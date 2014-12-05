@@ -36,6 +36,7 @@ library
                      Handler.GetScore
                      Handler.GetScoreboard
                      Handler.GetMessages
+                     Handler.GetTaskIDs
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
