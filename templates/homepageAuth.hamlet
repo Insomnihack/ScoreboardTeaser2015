@@ -26,7 +26,7 @@
           <h3>
         <p>
         <center>
-         <form .pure-form action="javascript:submitFlag();">
+         <form .pure-form>
           <input type="text" name="flag" placeholder="Enter your flag..." #flag>
         <input type="hidden" name="taskname" #taskname>
         <div #exit>

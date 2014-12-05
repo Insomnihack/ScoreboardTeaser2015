@@ -6,7 +6,7 @@ import qualified Data.Text as T (Text, pack)
 
 getGetTaskIDsR :: Handler Value
 getGetTaskIDsR = do
-    teamId <- requireAuthId
+    _ <- requireAuthId
     mChallUser <- lookupSession "challUser"
     challUser <- case mChallUser of
         Nothing -> do

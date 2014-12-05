@@ -34,9 +34,11 @@ RegisterTeam: Register new team
 RsndVerifLink: Resend verification link
 HScoreboard: Scoreboard
 HSubscribe: Register for the Insomni'hack CTF
+HRules: Insomni'hack rules
 HMessages: Latest news !
 CTFClosed: Sorry, CTF closed
 SubscribeTitle: Subscribe
 ScoreboardTitle: Scoreboard
 NewPasswordTitle: Reset Password
 HomeTitle: Insomni'hack 2015 Teaser
+RulesTitle: Rules

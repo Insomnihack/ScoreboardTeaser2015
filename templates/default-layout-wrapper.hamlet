@@ -43,6 +43,12 @@ $newline never
                     $else
                         <li>
                             <a href="@{ScoreboardR}">Scoreboard
+                    $if (==) (show $ Just RulesR) (show currRoute)
+                        <li .pure-menu-selected>
+                            <a href=@{RulesR}>Rules
+                    $else
+                        <li>
+                            <a href="@{RulesR}">Rules
                     $maybe _ <- maid
                         <li>
                             <a href="@{MyLogoutR}">Logout

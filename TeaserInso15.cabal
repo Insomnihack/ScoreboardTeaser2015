@@ -37,6 +37,7 @@ library
                      Handler.GetScoreboard
                      Handler.GetMessages
                      Handler.GetTaskIDs
+                     Handler.Rules
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

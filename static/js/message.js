@@ -52,6 +52,7 @@ function genMessage(body, news){
 
     if(news.script!=""){
         var b = document.createElement("button");
+        b.classList.add("red");
         b.classList.add("pure-button");
         var bContent = document.createTextNode("Play");
         b.addEventListener("click", function(x) { eval(news.script) }, false)

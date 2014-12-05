@@ -18,3 +18,4 @@
 /getScoreboard                  GetScoreboardR  GET
 /getMessages                    GetMessagesR    GET
 /getTaskIDs                     GetTaskIDsR     GET
+/rules                          RulesR          GET
