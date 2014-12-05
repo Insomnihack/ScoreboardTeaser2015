@@ -1,32 +1,35 @@
-<div .splash-container>
-  <canvas .splash-canvas #padcanvas height="500" width="1000">
-    your browser does not support canvas
-  <div .splash #pad>
-    <h1 .splash-head #teamstatus>
-      <div #score>
-      <div #ids>
-    <p #message .pure-alert style="display:none">
-    <div .pure-g>
-      $forall Entity _ task <- tasks
-        <div .l-box .pure-u-1-4 .my-pure-button .task-button>
-          <p>
-            #{taskName task}
-          <span>
-            #{taskValue task} pts
-          <span style="display:none" .task-infos>
-            #{toJsonText $ object ["name" .= taskName task, "type" .= taskType task, "description" .= taskDescription task, "author" .= taskAuthor task, "value" .= taskValue task, "youtube" .= taskYoutube task]}
-        <div .pure-u .pure-button-spacer>
+<div .pure-g style="height: 100%;">
+  <div .splash-container>
+   <div .pure-u-7-24 #logo>
+     <canvas .splash-canvas #padcanvas height="500" width="1000">
+       your browser does not support canvas
+   <div .pure-u-17-24 #pad>
+     <h1 .splash-head #teamstatus>
+       <div #score>
+       <div #ids>
+     <p #message .pure-alert style="display:none">
+     <div .pure-g>
+       $forall Entity _ task <- tasks
+         <div .l-box .pure-u-1-4 .my-pure-button .task-button>
+           <p>
+             #{taskName task}
+           <span>
+             #{taskValue task} pts
+           <span style="display:none" .task-infos>
+             #{toJsonText $ object ["name" .= taskName task, "type" .= taskType task, "description" .= taskDescription task, "author" .= taskAuthor task, "value" .= taskValue task, "youtube" .= taskYoutube task]}
+         <div .pure-u .pure-button-spacer>
 
-<div #hideshow style="visibility: hidden;">
-  <div #fade>
-  <div .popup_block>
-    <div .popup #infosTask>
-      <p>
-      <center>
-        <h3>
-      <p>
-      <center>
-        <input type="text" name="flag" #flag>
-      <input type="hidden" name="taskname" #taskname>
-      <div #exit>
-        <img src="@{StaticR img_power_png}">
+  <div #hideshow style="visibility: hidden;">
+    <div #fade>
+    <div .popup_block>
+      <div .popup #infosTask>
+        <p>
+        <center>
+          <h3>
+        <p>
+        <center>
+         <form .pure-form action="javascript:submitFlag();">
+          <input type="text" name="flag" placeholder="Enter your flag..." #flag>
+        <input type="hidden" name="taskname" #taskname>
+        <div #exit>
+          <img src="@{StaticR img_power_png}">
