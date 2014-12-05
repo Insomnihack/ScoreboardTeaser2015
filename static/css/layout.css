@@ -19,9 +19,9 @@ body {
     font-size: 13px;
     background-color: #4d0d0f;
     margin: 0;
-	padding: 0;
-	height: 100%;
-	font-family: georgia, times, "times new roman", serif;
+    padding: 0;
+    height: 100%;
+    font-family: verdana, georgia, sans-serif;
     /*background-color: black;*/
 }
 
@@ -424,6 +424,7 @@ a.pure-button-primary {
     border-radius: 5px;
     line-height: 1em;
     z-index: 2;
+    position:relative;
 }
 
 /* This is the subheading that appears on the blue section */
