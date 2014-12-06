@@ -370,7 +370,7 @@ a.pure-button-primary {
     height: 50%;
     margin: auto;
     position: absolute;
-    top: 10%; left: 0; bottom: 0; right: 0;
+    top: 50px; left: 0; bottom: 0; right: 0;
     text-align: center;
     text-transform: uppercase;
 }
