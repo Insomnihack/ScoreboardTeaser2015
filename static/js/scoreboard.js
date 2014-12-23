@@ -84,22 +84,22 @@ function genTaskCase(line, task, solvedTasks, size){
 function headerTasks(body, arrayTasks){
   var header = document.createElement("div");
   header.classList.add("pure-g");
-  genCase(header, "Rank", "10%");
-  genCase(header, "Team", "10%");
-  genCase(header, "Country", "10%");
+  genCase(header, "Rank", "9%");
+  genCase(header, "Team", "19%");
+  genCase(header, "Country", "12%");
   genCase(header, "Score", "10%");
-  arrayTasks.map(function(x) { return genCase(header, x, (100-40)/arrayTasks.length+"%"); })
+  arrayTasks.map(function(x) { return genCase(header, x, (100-50)/arrayTasks.length+"%"); })
   body.appendChild(header);
 }
 
 function genScoreboard(body, team, tasks){
   var line = document.createElement("div");
   line.classList.add("pure-g");
-  genCase(line, team.pos, "10%");
-  genCase(line, team.team, "10%");
-  genCaseCountry(line, team.country, "10%");
+  genCase(line, team.pos, "9%");
+  genCase(line, team.team, "19%");
+  genCaseCountry(line, team.country, "12%");
   genCase(line, team.score, "10%");
-  tasks.map(function(x) { return genTaskCase(line, x, team.taskStats, (100-40)/tasks.length+"%"); });
+  tasks.map(function(x) { return genTaskCase(line, x, team.taskStats, (100-50)/tasks.length+"%"); });
   body.appendChild(line);
 }
 
