@@ -445,10 +445,10 @@ a.pure-button-primary {
 	/*margin-top: 5%;*/
     position: absolute;
     text-align: center;
-    margin-left: auto;
+    margin-left: 3%;
     margin-right: auto;
-    max-height: 80%;
-    max-width: 80%;
+    max-height: 100%;
+    max-width: 70%;
     z-index: 0;
     /*height: 90%;*/
 }
