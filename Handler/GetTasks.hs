@@ -10,6 +10,7 @@ getGetTasksR = do
     tasks <- runDB $ selectList [TaskOpen ==. True] []
     let final = map extractValues tasks
     modified <- isNewResponse $ T.pack $ show final
+    addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
     if modified
         then
             returnJson final

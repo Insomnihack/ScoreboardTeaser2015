@@ -249,7 +249,8 @@ instance AccountSendEmail App where
                                                         ]
                                         let subj = msg MsgSubjectMailVerify
                                         -- sendMail (msg MsgSubjectMailVerify) content email
-                                        setMessage $ toHtml completeUrl
+                                        setMessage $ "Not open yet !"
+                                        -- setMessage $ toHtml completeUrl
     sendNewPasswordEmail uname email url = do
                                             msg <- getMessageRender
                                             hostname <- getHostname
@@ -262,7 +263,8 @@ instance AccountSendEmail App where
                                                             ]
                                             let subj = msg MsgSubjectMailReset
                                             -- sendMail (msg MsgSubjectMailReset) content email
-                                            setMessage $ toHtml completeUrl
+                                            setMessage $ "Not open yet !"
+                                            -- setMessage $ toHtml completeUrl
 instance YesodAuthAccount (AccountPersistDB App Team) App where
     runAccountDB = runAccountPersistDB
 

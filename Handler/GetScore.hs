@@ -17,6 +17,7 @@ getGetScoreR = do
     score <- getScoreTeam teamId
     let final = toObject teamName score
     modified <- isNewResponse $ T.pack $ show final
+    addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
     if modified
         then
             returnJson final

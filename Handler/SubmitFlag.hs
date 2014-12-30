@@ -8,6 +8,7 @@ import Network.Wai.Internal
 
 postSubmitFlagR :: T.Text -> Handler Value
 postSubmitFlagR taskname = do
+    addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
     msg <- getMessageRender
     teamId <- requireAuthId
     (mopen :: Maybe (Entity State)) <- runDB $ selectFirst  [] []

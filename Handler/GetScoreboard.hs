@@ -62,6 +62,7 @@ getGetScoreboardR :: Handler Value
 getGetScoreboardR = do
     addHeader ("Access-Control-Allow-Origin"::T.Text) ("*"::T.Text)
     addHeader ("Access-Control-Expose-Headers"::T.Text) ("Etag"::T.Text)
+    addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
     cacheSeconds 30
     allTeams <- runDB $ selectList [TeamVerified ==. True] [Asc TeamLogin]
     allTasks <- runDB $ selectList [TaskOpen ==. True] [Asc TaskName]
@@ -75,7 +76,7 @@ getGetScoreboardR = do
         then
             returnJson final
         else
-            sendResponseStatus status304 ("Not Modified" ::T.Text)
+            sendResponseStatus status304 ("Not MofoDified" ::T.Text)
     where
         extractNames :: Entity Task -> T.Text
         extractNames (Entity _ t) = taskName t
