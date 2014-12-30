@@ -5,7 +5,7 @@
 
 /                               HomeR           GET POST
 /scoreboard                     ScoreboardR     GET
-/subscribe                      SubscribeR      GET POST
+/register                       SubscribeR      GET POST
 /verify/#Username/#T.Text       VerifyR         GET
 /logout                         MyLogoutR       GET
 /resetPassword                  ResetPasswordR  POST

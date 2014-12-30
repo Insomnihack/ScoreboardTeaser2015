@@ -55,10 +55,10 @@ $newline never
                     $nothing
                         $if (==) (show $ Just SubscribeR) (show currRoute)
                             <li .pure-menu-selected>
-                                <a href="@{SubscribeR}">Subscribe
+                                <a href="@{SubscribeR}">Register
                         $else
                             <li>
-                                <a href="@{SubscribeR}">Subscribe
+                                <a href="@{SubscribeR}">Register
 
         ^{pageBody pc}
 
