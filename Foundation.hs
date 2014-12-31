@@ -136,8 +136,19 @@ instance Yesod App where
         $(widgetFile "other")
 
     defaultLayout widget = do
-        addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
         master <- getYesod
+        addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
+        mproto <- lookupHeader "X-Forwarded-Proto"
+        case mproto of
+            Just proto ->
+                if (extraTLS $ appExtra $ settings master) && (decodeUtf8 proto == "http")
+                    then do
+                        hostname <- getHostname
+                        redirect (hostname)
+                        else
+                            return ()
+            Nothing -> return ()
+
         mmsg <- getMessage
         msg <- case mmsg of
             Nothing -> do
