@@ -71,19 +71,19 @@ type Form x = Html -> MForm (HandlerT App IO) (FormResult x, Widget)
 
 isNotAuthenticated :: HandlerT App IO AuthResult
 isNotAuthenticated = do
-                    msg <- getMessageRender
-                    mu <- maybeAuthId
-                    return $ case mu of
-                        Nothing -> Authorized
-                        Just _ -> Unauthorized $ msg MsgAlreadyAuthenticated
+    msg <- getMessageRender
+    mu <- maybeAuthId
+    return $ case mu of
+        Nothing -> Authorized
+        Just _ -> Unauthorized $ msg MsgAlreadyAuthenticated
 
 isAuthenticated :: HandlerT App IO AuthResult
 isAuthenticated = do
-                    msg <- getMessageRender
-                    mu <- maybeAuthId
-                    return $ case mu of
-                        Nothing -> Unauthorized $ msg MsgNotAuthenticated
-                        Just _ -> Authorized
+    msg <- getMessageRender
+    mu <- maybeAuthId
+    return $ case mu of
+        Nothing -> Unauthorized $ msg MsgNotAuthenticated
+        Just _ -> Authorized
 
 -- Please see the documentation for the Yesod typeclass. There are a number
 -- of settings which can be configured by overriding methods here.
@@ -213,14 +213,15 @@ sendMail subject body to = do
                     sesSecretKey = encodeUtf8 (extraSESSecretKey $ appExtra $ settings h),
                     sesRegion = (extraSESRegion $ appExtra $ settings h)
                   }
-    renderSendMailSES (httpManager h) ses Mail{ mailHeaders = [ ("Subject", subject) ],
-                                                mailFrom = Address Nothing (extraSESFrom $ appExtra $ settings h),
-                                                mailTo = [Address Nothing to],
-                                                mailCc = [],
-                                                mailBcc = [],
-                                                mailParts = return
-                                                    [ Part "text/plain" None Nothing [] $ LU.fromString $ body]
-                                               }
+    renderSendMailSES (httpManager h) ses Mail{
+        mailHeaders = [ ("Subject", subject) ],
+        mailFrom = Address Nothing (extraSESFrom $ appExtra $ settings h),
+        mailTo = [Address Nothing to],
+        mailCc = [],
+        mailBcc = [],
+        mailParts = return
+        [ Part "text/plain" None Nothing [] $ LU.fromString $ body]
+    }
 
 getHostname :: Handler T.Text
 getHostname = do
@@ -238,33 +239,52 @@ getHostname = do
 
 instance AccountSendEmail App where
     sendVerifyEmail uname email url = do
-                                        msg <- getMessageRender
-                                        hostname <- getHostname
-                                        let completeUrl = T.concat [hostname, url]
-                                        $(logWarn) completeUrl
-                                        let content = unlines
-                                                        [ "Please go to the URL below to verify your email address.",
-                                                          "",
-                                                          T.unpack completeUrl
-                                                        ]
-                                        let subj = msg MsgSubjectMailVerify
-                                        -- sendMail (msg MsgSubjectMailVerify) content email
-                                        setMessage $ "Not open yet !"
-                                        -- setMessage $ toHtml completeUrl
+        msg <- getMessageRender
+        hostname <- getHostname
+        let completeUrl = T.concat [hostname, url]
+        let content = unlines [ "Hello and welcome to Insomni'hack CTF teaser.",
+                                "",
+                                "You have registered a team for the Insomni'hack teaser 2015.",
+                                "",
+                                "You team details :",
+                                "Team name : " ++ T.unpack uname,
+                                "Email : " ++ T.unpack email,
+                                "",
+                                "You MUST confirm the registration by clicking the link below:",
+                                T.unpack completeUrl,
+                                "",
+                                "",
+                                "=======",
+                                "Infos",
+                                "=======",
+                                "",
+                                "The CTF will run from Jan. 10, 2015, 9 a.m. to Jan. 11, 2015, 9 p.m. UTC",
+                                "You can check your timezone here :",
+                                "http://www.timeanddate.com/worldclock/converter.html?year=2015&month=1&day=10&hour=9&min=0&sec=0&p1=0&p2=270",
+                                "",
+                                "Please check the rules on the main site here :",
+                                "https://teaser.insomnihack.ch/rules",
+                                "",
+                                "We hope you'll enjoy the game.",
+                                "",
+                                "Good luck"
+                                ]
+        let subj = msg MsgSubjectMailVerify
+        sendMail subj content email
+        setMessageI MsgValidationLink
     sendNewPasswordEmail uname email url = do
-                                            msg <- getMessageRender
-                                            hostname <- getHostname
-                                            let completeUrl = T.concat [hostname, url]
-                                            $(logWarn) completeUrl
-                                            let content = unlines
-                                                            [ "Please go to the URL below to reset your password.",
-                                                              "",
-                                                              T.unpack completeUrl
-                                                            ]
-                                            let subj = msg MsgSubjectMailReset
-                                            -- sendMail (msg MsgSubjectMailReset) content email
-                                            setMessage $ "Not open yet !"
-                                            -- setMessage $ toHtml completeUrl
+        msg <- getMessageRender
+        hostname <- getHostname
+        let completeUrl = T.concat [hostname, url]
+        let content = unlines [ "Hello " ++ T.unpack uname ++ ",",
+                                "Please go to the URL below to reset your password.",
+                                "",
+                                T.unpack completeUrl
+                                ]
+        let subj = msg MsgSubjectMailReset
+        sendMail subj content email
+        setMessageI MsgResetLink
+
 instance YesodAuthAccount (AccountPersistDB App Team) App where
     runAccountDB = runAccountPersistDB
 
