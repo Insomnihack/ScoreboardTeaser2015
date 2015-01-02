@@ -1,9 +1,8 @@
 module Handler.Verify where
 
 import Import
-import System.Random
-import System.IO.Unsafe
 import qualified Data.Text as T
+import MyFunc
 
 getVerifyR :: Username -> T.Text -> Handler Html
 getVerifyR uname k = do
@@ -23,10 +22,10 @@ getVerifyR uname k = do
                         redirect SubscribeR
                     else do
                         runAccountDB $ verifyAccount user
-                        let randomStr = filter isAlphaNum $ randomRs ('0','z') $ unsafePerformIO newStdGen
-                        let userChall = T.append ("user"::T.Text) $ T.pack $ take 6 $ randomStr
-                        let userPwd = T.pack $ take 10 $ drop 1337 randomStr
+                        randomName <- lift $ genString 6
+                        randomPass <- lift $ genString 10
+                        let userChall = T.append ("user"::T.Text) randomName
+                        let userPwd = randomPass
                         runDB $ update u [TeamChalluser =. userChall, TeamChallpwd =. userPwd ]
                         setMessageI MsgWelcomeRegistered
                         redirect HomeR
-                        where isAlphaNum x = x `elem` (['a','b'..'z']++['0','1'..'9']++['A','B'..'Z'])

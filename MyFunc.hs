@@ -2,8 +2,11 @@
 module MyFunc where
 
 import Import
+import System.Random.MWC
+import Control.Monad
 import Data.Text as T
 import Yesod.Static
+import Data.ByteString as B
 import qualified Data.Text.Lazy as TL
 import qualified Data.Text.Lazy.Encoding as TL
 
@@ -36,3 +39,11 @@ isNewResponse response = do
                 return False
             else
                 return True
+
+genString :: Int -> IO T.Text
+genString size = do
+    g <- createSystemRandom
+    str <- replicateM 100 $ uniformR (48, 122) g
+    let txt = T.filter isAlphaNum $ decodeUtf8 $ B.pack str
+    return $ T.take size txt
+    where isAlphaNum x = x `Import.elem` (['a','b'..'z']++['0','1'..'9']++['A','B'..'Z'])
