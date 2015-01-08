@@ -64,7 +64,7 @@ getGetScoreboardR = do
     addHeader ("Access-Control-Expose-Headers"::T.Text) ("Etag"::T.Text)
     addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
     cacheSeconds 30
-    allTeams <- runDB $ selectList [TeamVerified ==. True] [Asc TeamLogin]
+    allTeams <- runDB $ selectList [TeamVerified ==. True] [Desc TeamLogin]
     allTasks <- runDB $ selectList [TaskOpen ==. True] [Asc TaskName]
     allSolved :: [Entity Solved] <- runDB $ selectList [] []
 

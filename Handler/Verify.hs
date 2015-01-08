@@ -23,9 +23,8 @@ getVerifyR uname k = do
                     else do
                         runAccountDB $ verifyAccount user
                         randomName <- lift $ genString 6
-                        randomPass <- lift $ genString 10
+                        userPwd <- lift $ genString 10
                         let userChall = T.append ("user"::T.Text) randomName
-                        let userPwd = randomPass
                         runDB $ update u [TeamChalluser =. userChall, TeamChallpwd =. userPwd ]
                         setMessageI MsgWelcomeRegistered
                         redirect HomeR

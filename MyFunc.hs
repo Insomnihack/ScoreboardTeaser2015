@@ -15,7 +15,7 @@ getScoreTeam teamId = do
     solvedTasks <- runDB $ selectList [SolvedTeamId ==. teamId] []
     let solvedTasksId = fmap (\ (Entity _ s) -> (solvedTaskId s)) solvedTasks
 
-    allTasks <- runDB $ selectList [TaskId <-. solvedTasksId] []
+    allTasks <- runDB $ selectList [TaskOpen ==. True, TaskId <-. solvedTasksId] []
     return $ extractInfos 0 [] allTasks
 
     where
