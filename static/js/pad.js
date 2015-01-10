@@ -140,34 +140,34 @@ window.addEventListener('load', function(){
 }
 
 
-  loadImages(function(images) {
-    var canvas = document.getElementById("padcanvas");
-    var angles=[0,0];
-    var clocks=[true,false];
-    var interval=0.5;
-    var maxin = 30;
-    var maxout = 5;
-    var frameinterval = 50;
-    var moveSpot = setInterval(function(){
-      if(Focus){
-        draw(canvas, images, angles);
-        for(i=0;i<clocks.length;i++){
-          if(clocks[i])
-            angles[i]+=interval;
-          else
-            angles[i]-=interval;
-        }
-        if(angles[0]>=maxin)
-          clocks[0]=0;
-      if(angles[0]<=-maxout)
-          clocks[0]=1;
-        if(angles[1]>=maxout)
-          clocks[1]=0;
-      if(angles[1]<=-maxin)
-          clocks[1]=1;
-      }
-    }, frameinterval);
-  });
+  // loadImages(function(images) {
+  //   var canvas = document.getElementById("padcanvas");
+  //   var angles=[0,0];
+  //   var clocks=[true,false];
+  //   var interval=0.5;
+  //   var maxin = 30;
+  //   var maxout = 5;
+  //   var frameinterval = 50;
+  //   var moveSpot = setInterval(function(){
+  //     if(Focus){
+  //       draw(canvas, images, angles);
+  //       for(i=0;i<clocks.length;i++){
+  //         if(clocks[i])
+  //           angles[i]+=interval;
+  //         else
+  //           angles[i]-=interval;
+  //       }
+  //       if(angles[0]>=maxin)
+  //         clocks[0]=0;
+  //     if(angles[0]<=-maxout)
+  //         clocks[0]=1;
+  //       if(angles[1]>=maxout)
+  //         clocks[1]=0;
+  //     if(angles[1]<=-maxin)
+  //         clocks[1]=1;
+  //     }
+  //   }, frameinterval);
+  // });
 
   function draw(canvas, images, angles){
     var ctx = canvas.getContext("2d");

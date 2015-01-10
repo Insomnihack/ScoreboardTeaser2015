@@ -4,6 +4,7 @@ module Handler.Home where
 import Import
 import MyAuth
 import qualified Data.Text as T
+import qualified Data.Text.Encoding as E
 
 getHomeR :: Handler Html
 getHomeR = do
@@ -18,6 +19,16 @@ getHomeR = do
                 $(widgetFile "messages")
         Just _ -> do
             tasks <- runDB $ selectList [TaskOpen ==. True] []
+            mTeamName <- lookupSession "teamName"
+            teamName <- case mTeamName of
+                Nothing -> return ""
+                Just t -> return t
+            mIp <- lookupHeader "X-Forwarded-For"
+            ip <- case mIp of
+                Nothing -> return ""
+                Just ip -> return ip
+            $(logWarn) $ T.concat [("teamName : "::T.Text), teamName, (", ip : "::T.Text), E.decodeUtf8 ip]
+
             defaultLayout $ do
                 setTitleI MsgHomeTitle
                 addScript $ StaticR js_pad_js

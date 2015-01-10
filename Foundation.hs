@@ -141,7 +141,6 @@ instance Yesod App where
         mproto <- lookupHeader "X-Forwarded-Proto"
         case mproto of
             Just proto -> do
-                $(logWarn) $ decodeUtf8 proto
                 if (extraTLS $ appExtra $ settings master) && (decodeUtf8 proto == "http")
                     then do
                         hostname <- getHostname

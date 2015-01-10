@@ -1,8 +1,5 @@
 <div .pure-g style="height: 100%;">
   <div .splash-container>
-   <div .pure-u-7-24 #logo>
-     <canvas .splash-canvas #padcanvas height="500" width="1000">
-       your browser does not support canvas
    <div .pure-u-17-24 #pad>
      <h1 .splash-head #teamstatus>
      <p #message .pure-alert style="display:none">
