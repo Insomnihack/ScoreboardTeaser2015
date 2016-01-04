@@ -49,7 +49,11 @@ function genCaseCountry(line, country, size){
   hcase.style.width=size;
   var pcontent = document.createElement("p");
   var img = document.createElement('img');
-  img.src = StaticRoot+'/img/flags/'+country;
+  img.src = StaticRoot+'/img/flags_new/'+country;
+  img.onerror = function(){
+    this.src = StaticRoot+'/img/flags_new/None.png';
+  }
+  img.title = country.split('.')[0];
   pcontent.appendChild(img);
   hcase.appendChild(pcontent);
   line.appendChild(hcase);
@@ -66,6 +70,7 @@ function genTaskCase(line, task, solvedTasks, size){
     var img = document.createElement('img');
     img.src = StaticRoot+'/img/solved.png';
     img.alt = "GG";
+    img.width = 24;
     var d = new Date(parseInt(solvedTasks[n][task].time)*900);
     img.title = d.toLocaleString();
   }
@@ -73,6 +78,7 @@ function genTaskCase(line, task, solvedTasks, size){
     var img = document.createElement('img');
     img.src = StaticRoot+'/img/nsolved.png';
     img.alt = "TG";
+    img.width = 24;
     img.title= "";
   }
 
