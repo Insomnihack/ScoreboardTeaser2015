@@ -1,4 +1,5 @@
 <div .splash-container>
+  <div .image-bg>
   <div .splashu>
     <p .splash-subhead>
       <form method=post enctype=#{enctype} action=@{HomeR} .pure-form .pure-form-aligned>

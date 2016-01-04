@@ -17,12 +17,13 @@ body {
     line-height: 1.7em;
     color: white;
     font-size: 13px;
-    background-color: #4d0d0f;
+    background-color: #262626;
+    /*background-color: #f5f9f6;*/
     margin: 0;
     padding: 0;
     height: 100%;
     font-size: 16px;
-    font-family: verdana, georgia, sans-serif;
+    font-family: roboto, sans-serif;
     /*background-color: black;*/
 }
 
@@ -64,9 +65,9 @@ body {
 }
 
 #scoreboard .pure-g {
-	border: 1px solid white;
+	/* border: 1px solid white; */
 	display: block;
-/*background-color: #4d0d0f;*/
+/*background-color: #f5f9f6;*/
 }
 /**/
 /*#scoreboard .pure-g:nth-child(even) {*/
@@ -105,7 +106,7 @@ body {
     left:0;
 }
 .popup_block {
-    background:#000;
+    background: rgba(1,2,3,0.1);
     padding: 1px 10px;
     border:1px solid white;
     border-radius: 10px;
@@ -122,7 +123,7 @@ body {
     float:left;
     width:100%;
     border-radius: 10px;
-    background:black;
+    background: rgba(1,2,3,0.4);
     margin:10px 0;
     padding-left: 10px;
     padding-right: 10px;
@@ -136,10 +137,12 @@ body {
     margin-bottom:0px;
     font-size:1.5em;
     font-weight:normal;
+    color: white;
 }
 .popup p {
     padding:5px 10px;
     margin:5px 0;
+    color: white;
 }
 .popup img.cntrl {
     position:absolute;
@@ -147,8 +150,21 @@ body {
     top:-20px;
 }
 
+.image-bg {
+	z-index: -2;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: -50px;
+	background: no-repeat top right;
+	background-size: auto 100%;
+	background-image:url('/static/img/baskerville-child-crane-bg.png');
+}
+
+
 .required label{
     color:white;
+/* color: #C62026; */
 }
 
 
@@ -160,7 +176,7 @@ h4,
 h5,
 h6,
 label {
-    color: #c72127;
+    color: #000000;
 }
 
 .pure-img-responsive {
@@ -327,6 +343,7 @@ a.pure-button-primary {
     border-bottom: none;
     /* I need a higher z-index here because of the scroll-over effect. */
     z-index: 4;
+    box-shadow: 0px 3px 5px -1px #000;
 }
 
 .home-menu .pure-menu-heading {
@@ -340,13 +357,13 @@ a.pure-button-primary {
 }
 
 .home-menu a {
-    color: #c72127;
+    color: #BDBDBD;
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
     background: none;
     border: none;
-    color: #4d0d0f;
+    color: #f5f9f6;
 }
 
 #logo {
@@ -363,7 +380,7 @@ a.pure-button-primary {
  */
 
 .splash-container {
-	/*background: #4d0d0f;*/
+	/*background: #f5f9f6;*/
     z-index: 1;
     overflow: hidden;
     /* The following styles are required for the "scroll-over" effect */
@@ -409,7 +426,7 @@ a.pure-button-primary {
 }
 
 #pad {
-    background: #4d0d0f;
+    background: #f5f9f6;
     /*min-width:700px;*/
     /*width: 63%;*/
     /*height: 80%;*/
@@ -492,6 +509,7 @@ a.pure-button-primary {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin: 2em 0 1em;
+    color: white;
 }
 
 /* This is a modifier class used when the content-head is inside a ribbon */
@@ -501,7 +519,7 @@ a.pure-button-primary {
 
 /* This is the class used for the content sub-headers (<h3>) */
 .content-subhead {
-    color: #c72127;
+    color: #bdbdbd;
 }
     .content-subhead i {
         margin-right: 7px;
@@ -521,8 +539,21 @@ a.pure-button-primary {
 /* We want to give the content area some more padding */
 .content {
     padding: 3em;
+    /* box-shadow: 14px 18px 38px 10px #FFF;*/
+}
+
+.shadowcontent {
+     box-shadow: 14px 18px 38px 10px #FFF;
 }
 
 .splash-head {
         font-size: 100%;
+}
+
+ul {
+	margin: 0;
+}
+
+.hl {
+	color: #C62026;
 }

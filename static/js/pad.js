@@ -60,7 +60,7 @@ function refreshScore(neverDrawn){
         sessionStorage.setItem("cachedEtagPad", etag);
         var data = JSON.parse(requestScore.responseText);
         var teamStatus = document.getElementById("teamstatus");
-        teamStatus.textContent = data.teamName+" - "+data.score+"PTS";
+        teamStatus.textContent = data.teamName+" - "+data.score+" PTS";
         solved = data.solved;
         redraw();
       }
@@ -181,6 +181,10 @@ function start(){
         var windowSize = viewport();
         can.width = windowSize.width-416;
         can.height = can.width*0.68;
+        if(can.width*0.68 > windowSize.height-75){
+          can.height = windowSize.height-75;
+          can.width = can.height/0.68;
+        }
         coeff = can.width/1024;
         redraw();
       }
@@ -197,6 +201,10 @@ function start(){
       var windowSize = viewport();
       can.width = windowSize.width-400;
       can.height = can.width*0.68;
+      if(can.width*0.68 > windowSize.height-75){
+        can.height = windowSize.height-75;
+        can.width = can.height/0.68;
+      }
       coeff = can.width/1024;
       refreshScore(true);
       window.setInterval(function () { if(Focus) { refreshScore(false)} }, 1000*60);
@@ -251,7 +259,7 @@ function taskInfos(taskSpecial){
   }
   document.getElementById('hideshow').style.visibility = 'visible';
   var divInfos = document.getElementById("infosTask");
-  divInfos.children[1].children[0].textContent = infos.name+' - '+infos.type+' - '+infos.value+' pts - realised by '+infos.author;
+  divInfos.children[1].children[0].textContent = infos.name+' - '+infos.type+' - '+infos.value+' pts - realized by '+infos.author;
   var flag = document.getElementById("flag")
   flag.value="";
   flag.focus();

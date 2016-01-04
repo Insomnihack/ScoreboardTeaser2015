@@ -1,4 +1,5 @@
 <div .content>
+  <div .image-bg>
   <h2 .content-head .is-center>_{MsgHSubscribe}
   <p #message .pure-alert style="display:none">
   <div .pure-g>

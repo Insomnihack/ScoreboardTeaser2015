@@ -1,5 +1,5 @@
 <div .content-wrapper>
-  <div .content>
+  <div .content .shadowcontent>
     <h2 .content-head .is-center>_{MsgHMessages}
     <div .pure-g #pnews>
       <span #lastnews style="display:none">

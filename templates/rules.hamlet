@@ -1,48 +1,37 @@
 <div .content #parent>
+  <div .image-bg>
   <h2 .content-head .is-center>_{MsgHRules}
   <div>
     Greetings and welcome to our third Insomni'hack teaser!
     <br>
     <br>
-    The teaser will run from 9 am UTC the 10th of January and will run for 36 hours.
+    The teaser will run from <span class="hl">9 am UTC the 10th of January</span> and will run for <span class="hl">36 hours</span>.
     <br>
     <br>
-    Categories will mostly be web and pwning.
+    Categories will be <span class="hl">Pwning</span>, <span class="hl">Web</span> and <span class="hl">Crypto</span>.
     <br>
     There will be no bonus points so the final ranking will be determined based on the time of the last challenge solved, ie first come first served.
     <br>
     Point of contacts in order of preference :
+    <ol>
+      <li><strong>IRC:</strong> #insomnihack on freenode
+      <li><strong>Mail:</strong> <a href="mailto:ctf@insomnihack.ch" style="color:white;">ctf@insomnihack.ch</a>
+      <li><strong>Twitter :</strong> <a href="https://twitter.com/1ns0mn1h4ck"style="color:white;">https://twitter.com/1ns0mn1h4ck</a>
+    <strong .hl>Prizes:
+    <ul>
+      <li>We will cover hotel (2 nights) and conference tickets for Insomni'hack 2015 for the first 3 teams.
+      <li>The 4th and 5th place teams will receive tickets for the conference.
+      <li>The conference will take place on the 20th of March 2015 at the Palexpo conference center in Geneva.
+      <li>The CTF will run during the evening and the night and is free for everyone to participate in.
     <br>
-    IRC: #insomnihack on freenode
-    <br>
-    Mail: <a href="mailto:ctf@insomnihack.ch" style="color:white;">ctf@insomnihack.ch</a>
-    <br>
-    Twitter : <a href="https://twitter.com/1ns0mn1h4ck"style="color:white;">https://twitter.com/1ns0mn1h4ck</a>
-    <br>
-    <br>
-    Prizes:
-    <br>
-    We will cover hotel (2 nights) and conference tickets for Insomni'hack 2015 for the first 3 teams.
-    <br>
-    The 4th and 5th place teams will receive tickets for the conference.
-    <br>
-    The conference will take place on the 20th of March 2015 at the Palexpo conference center in Geneva.
-    <br>
-    The CTF will run during the evening and the night and is free for everyone to participate in.
-    <br>
-    <br>
-    Rules :
-    <br>
-    Team size is not restricted for the teaser, but only 8 participants per team will be allowed at the main CTF event. We will only provide 2 rooms for a total of up to 8 people for the first 3 qualifying teams.
-    <br>
-    It is of course forbidden to :
-    <br>
-    - share flags
-    <br>
-    - break or destruct a challenge by eg removing the flag
-    <br>
-    - attack the scoring system
-    <br>
+    <strong .hl>Rules :
+    <ul>
+      <li>Team size is not restricted for the teaser, but only 8 participants per team will be allowed at the main CTF event. We will only provide 2 rooms for a total of up to 8 people for the first 3 qualifying teams.
+      <li>It is of course forbidden to :
+       <ul>
+        <li>share flags
+        <li>break or destruct a challenge by eg removing the flag
+        <li>attack the scoring system
     <br>
     We reserve the rights to disqualify any cheating team.
     <br>
