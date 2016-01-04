@@ -7,14 +7,8 @@
 ### How do I get set up? ###
 
 * You need connection to postgresql database, application will create every table at first launch.
-* Install haskell and use stackage cabal repository (that is a clean repo without buggy version dependencies) https://github.com/fpco/stackage/wiki/Preparing-your-system-to-use-Stackage
-* Install necessary build tools: `cabal install alex happy yesod-bin`
-* Install unknown stackage dependencies (RESPECT ORDER)
-    * nonce https://hackage.haskell.org/package/nonce
-        * Find download link, wget it and then `cabal install nonce-X.tar.gz`
-    * yesod-auth-account https://hackage.haskell.org/package/yesod-auth-account
-        * Find download link, wget it and then `cabal install yesod-auth-X.tar.gz`
-* Go into your cloned directory and run `cabal install`
+* Install haskell and use stack
+* Go into your cloned directory and run `stack init && stack build && stack exec -- yesod devel`
 
 Under ubuntu if you get the following error you need to install libpq-dev `apt-get install libpq-dev`:
 ```

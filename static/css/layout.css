@@ -30,8 +30,19 @@ body {
     color: white;
 }
 
+#IOTRoom {
+    margin: auto;
+}
+
+.home-menu ul {
+    float:right;
+}
+
 #teamstatus {
+    width: 100%;
+    position: absolute;
     text-align:center;
+    line-height: 0em;
 }
 
 
@@ -102,7 +113,7 @@ body {
     min-width: 700px;
     width: 0px;
     position:fixed;
-    top:5%;
+    top:25%;
     left:45%;
     margin:0 0 0 -250px;
     z-index:100;
@@ -418,6 +429,12 @@ a.pure-button-primary {
     width: 100%;
 }
 
+#loading{
+    position:absolute;
+    margin-top: 200px;
+    margin-left: -100px
+}
+
 /* This is the main heading that appears on the blue section */
 .splash-head {
     font-size: 20px;
@@ -460,7 +477,7 @@ a.pure-button-primary {
 .content-wrapper {
     /* These styles are required for the "scroll-over" effect */
     position: absolute;
-    top: 87%;
+    top: 95%;
     min-width: 900px;
     width:100%;
     min-height: 12%;

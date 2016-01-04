@@ -137,11 +137,11 @@ instance Yesod App where
 
     defaultLayout widget = do
         master <- getYesod
-        addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
-        mproto <- lookupHeader "X-Forwarded-Proto"
-        case mproto of
-            Just proto -> do
-                if (extraTLS $ appExtra $ settings master) && (decodeUtf8 proto == "http")
+        addHeader ("Server"::T.Text) ("Teaser INS2K16"::T.Text)
+        mport <- lookupHeader "X-Forwarded-Port"
+        case mport of
+            Just port -> do
+                if (extraTLS $ appExtra $ settings master) && (decodeUtf8 port == "80")
                     then do
                         hostname <- getHostname
                         redirect (hostname)

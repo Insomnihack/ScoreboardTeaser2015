@@ -8,8 +8,8 @@ BodyOtherError: You're doing something wrong !
 BodyAuthRequired: You must be authenticated to access this page
 BodyPageNotFound: The page you requested doesn't exist
 BodyInternalError: An unknown error occurred. The site admin has been informed.
-SubjectMailVerify: Insomni'hack 2015 Teaser - Check your email
-SubjectMailReset: Insomni'hack 2015 Teaser - Reset your password
+SubjectMailVerify: Insomni'hack 2016 Teaser - Check your email
+SubjectMailReset: Insomni'hack 2016 Teaser - Reset your password
 BadLoginPassword: Unknown team name or password
 UnknownForm: Unknown form error
 NeedValidation: You need to validate your account
@@ -40,5 +40,5 @@ CTFClosed: Sorry, CTF closed
 SubscribeTitle: Register
 ScoreboardTitle: Scoreboard
 NewPasswordTitle: Reset Password
-HomeTitle: Insomni'hack 2015 Teaser
+HomeTitle: Insomni'hack 2016 Teaser
 RulesTitle: Rules

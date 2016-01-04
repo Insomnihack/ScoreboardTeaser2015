@@ -16,3 +16,4 @@ cabal.sandbox.config
 *.yml
 *.sh
 *.keter
+.stack-work/

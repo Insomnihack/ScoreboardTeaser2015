@@ -10,7 +10,7 @@ getGetTasksR = do
     tasks <- runDB $ selectList [TaskOpen ==. True] []
     let final = map extractValues tasks
     modified <- isNewResponse $ T.pack $ show final
-    addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
+    addHeader ("Server"::T.Text) ("Teaser INS2K16"::T.Text)
     if modified
         then
             returnJson final
@@ -19,9 +19,9 @@ getGetTasksR = do
         where
             extractValues (Entity _ task) =
                 object ["name" .= (taskName task),
-                        "youtube" .= (taskYoutube task),
+                        "special" .= (taskSpecial task),
                         "description" .= (taskDescription task),
                         "type" .= (taskType task),
-                        "points" .= (taskValue task),
+                        "value" .= (taskValue task),
                         "author" .= (taskAuthor task)]
 

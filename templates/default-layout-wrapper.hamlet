@@ -14,10 +14,7 @@ $newline never
 
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <style>
-            .my-pure-button, .my-pure-button:hover, .my-pure-button-hover { background-image: url("#{Settings.staticRoot $ settings master}/img/tv.png"); }
-            .task-button:hover { background-image: url("#{Settings.staticRoot $ settings master}/img/tv-countdown.gif"); }
-            .solved-button:hover { background-image: url("#{Settings.staticRoot $ settings master}/img/tv-noise.gif"); }
-            .pure-menu.pure-menu-open.pure-menu-fixed { background-image: url("#{Settings.staticRoot $ settings master}/img/banner.png"); }
+            .pure-menu.pure-menu-open.pure-menu-fixed { background-image: url("#{Settings.staticRoot $ settings master}/img/insomnihack.png"); }
 
         ^{pageHead pc}
 
@@ -59,6 +56,7 @@ $newline never
                         $else
                             <li>
                                 <a href="@{SubscribeR}">Register
+                <p #teamstatus>
 
         ^{pageBody pc}
 

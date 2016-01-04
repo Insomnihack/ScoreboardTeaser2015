@@ -1,18 +1,10 @@
 <div .pure-g style="height: 100%;">
   <div .splash-container>
-   <div .pure-u-17-24 #pad>
-     <h1 .splash-head #teamstatus>
-     <p #message .pure-alert style="display:none">
+    <center>
+      <img src="@{StaticR img_gears_gif}" #loading>
+   <div .pure-u-1 #pad>
      <div .pure-g>
-       $forall Entity _ task <- tasks
-         <div .l-box .pure-u-1-4 .my-pure-button .task-button>
-           <p>
-             #{taskName task}
-           <span>
-             #{taskValue task} pts
-           <span style="display:none" .task-infos>
-             #{toJsonText $ object ["name" .= taskName task, "type" .= taskType task, "description" .= taskDescription task, "author" .= taskAuthor task, "value" .= taskValue task, "youtube" .= taskYoutube task]}
-         <div .pure-u .pure-button-spacer>
+      <canvas #IOTRoom width=1024 height=700>
 
   <div #hideshow style="visibility: hidden;">
     <div #fade>

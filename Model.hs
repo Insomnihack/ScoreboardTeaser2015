@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleInstances #-}
 module Model where
 
 import Yesod
@@ -14,3 +15,12 @@ import Prelude
 -- http://www.yesodweb.com/book/persistent/
 share [mkPersist sqlSettings, mkMigrate "migrateAll"]
     $(persistFileWith lowerCaseSettings "config/models")
+
+
+instance ToJSON (Entity Task) where
+    toJSON (Entity _ task) = object [  "name" .= (taskName task),
+                                        "special" .= (taskSpecial task),
+                                        "description" .= (taskDescription task),
+                                        "type" .= (taskType task),
+                                        "value" .= (taskValue task),
+                                        "author" .= (taskAuthor task)]

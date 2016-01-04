@@ -62,7 +62,7 @@ getGetScoreboardR :: Handler Value
 getGetScoreboardR = do
     addHeader ("Access-Control-Allow-Origin"::T.Text) ("*"::T.Text)
     addHeader ("Access-Control-Expose-Headers"::T.Text) ("Etag"::T.Text)
-    addHeader ("Server"::T.Text) ("Teaser INS2K15"::T.Text)
+    addHeader ("Server"::T.Text) ("Teaser INS2K16"::T.Text)
     cacheSeconds 30
     allTeams <- runDB $ selectList [TeamVerified ==. True] [Desc TeamLogin]
     allTasks <- runDB $ selectList [TaskOpen ==. True] [Asc TaskName]
