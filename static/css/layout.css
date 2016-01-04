@@ -109,7 +109,6 @@ body {
     background: rgba(1,2,3,0.1);
     padding: 1px 10px;
     border:1px solid white;
-    border-radius: 10px;
     float:left;
     min-width: 700px;
     width: 0px;
@@ -122,7 +121,6 @@ body {
 .popup_block .popup {
     float:left;
     width:100%;
-    border-radius: 10px;
     background: rgba(1,2,3,0.4);
     margin:10px 0;
     padding-left: 10px;
