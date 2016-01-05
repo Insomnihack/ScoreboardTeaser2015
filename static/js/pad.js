@@ -12,6 +12,7 @@ var solved = [];
 
 var images = {};
 function loadImages(callback) {
+    var windowSize = viewport();
     var sources = {
       background: 'background.png',
       cat_box_normal: 'cat_box_normal.png',
@@ -46,7 +47,16 @@ function loadImages(callback) {
               callback(images);
           }
       };
-      images[src].src = StaticRoot+'/img/IOTRoom/'+sources[src];
+
+      if(windowSize.width < 1500){
+        images[src].src = StaticRoot+'/img/IOTRoomLow/'+sources[src];
+      }
+      else if(windowSize.width < 2100){
+        images[src].src = StaticRoot+'/img/IOTRoom/'+sources[src];
+      }
+      else{
+        images[src].src = StaticRoot+'/img/IOTRoomHD/'+sources[src];
+      }
     }
 }
 
@@ -130,6 +140,7 @@ function getTaskName(special){
 function redraw(){
   var can = document.getElementById('IOTRoom');
   var ctx = can.getContext('2d');
+  console.log(ctx.imageSmoothingEnabled);
   ctx.drawImage(images['background'], 0, 0, can.width, can.height);
 
   for(var key in objects){

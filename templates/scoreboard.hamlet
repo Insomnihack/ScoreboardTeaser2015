@@ -1,4 +1,4 @@
 <div .content #parent >
-  <div .image-bg>
+  <div .image-bg .skull>
   <h2 .content-head .is-center>_{MsgHScoreboard}
   <div #scoreboard>

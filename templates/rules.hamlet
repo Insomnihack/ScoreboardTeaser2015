@@ -1,8 +1,8 @@
 <div .content #parent>
-  <div .image-bg>
+  <div .image-bg .skull>
   <h2 .content-head .is-center>_{MsgHRules}
   <div>
-    Greetings and welcome to our third Insomni'hack teaser!
+    Greetings and welcome to our fourth Insomni'hack teaser!
     <br>
     <br>
     The teaser will start on <span class="hl">January 16th at 9am UTC</span> and will last <span class="hl">36 hours</span>.
@@ -21,7 +21,7 @@
     <ul>
       <li>We will cover hotel (2 nights) and conference tickets for Insomni'hack 2016 for the first 3 teams.
       <li>The 4th, 5th and 6th teams will receive tickets for the conference.
-      <li>The conference will take place on the 18th of March 2015 at the Palexpo conference center in Geneva.
+      <li>The conference will take place on the 18th of March 2016 at the Palexpo conference center in Geneva.
       <li>The CTF will run during the evening and the night and is free for everyone to participate in.
     <br>
     <strong .hl>Rules :

@@ -15,6 +15,7 @@ $newline never
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <style>
             .pure-menu.pure-menu-open.pure-menu-fixed { background-image: url("#{Settings.staticRoot $ settings master}/img/insomnihack.png"); }
+            .skull { background: no-repeat top right; background-image:url("#{Settings.staticRoot $ settings master}/img/baskerville-child-crane-bg.png"); }
 
         ^{pageHead pc}
 
