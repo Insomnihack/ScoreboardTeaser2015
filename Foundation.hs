@@ -257,7 +257,7 @@ instance AccountSendEmail App where
                                 "",
                                 "You have registered a team for the Insomni'hack teaser 2016.",
                                 "",
-                                "You team details :",
+                                "Your team details :",
                                 "Team name : " ++ T.unpack uname,
                                 "Email : " ++ T.unpack email,
                                 "",

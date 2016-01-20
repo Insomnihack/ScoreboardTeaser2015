@@ -18,7 +18,7 @@ getHomeR = do
                 $(widgetFile "homepage")
                 $(widgetFile "messages")
         Just _ -> do
-            tasks <- runDB $ selectList [TaskOpen ==. True] []
+            tasks <- runDB $ selectList [TaskOpen ==. True] [Asc TaskName]
             mTeamName <- lookupSession "teamName"
             teamName <- case mTeamName of
                 Nothing -> return ""

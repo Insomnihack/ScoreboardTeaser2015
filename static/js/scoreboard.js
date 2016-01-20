@@ -28,11 +28,14 @@ function extractName(solvedTask){
   return Object.keys(solvedTask)[0];
 }
 
-function genCase(line, task, size){
+function genCase(line, task, size, istask){
   var hcase = document.createElement("div");
   hcase.classList.add("l-box");
   hcase.classList.add("pure-u");
   hcase.classList.add("is-center");
+  if(typeof(istask) !== 'undefined'){
+    hcase.classList.add("taskname");
+  }
   hcase.style.width=size;
   var pcontent = document.createElement("p");
   var content = document.createTextNode(task);
@@ -50,6 +53,7 @@ function genCaseCountry(line, country, size){
   var pcontent = document.createElement("p");
   var img = document.createElement('img');
   img.src = StaticRoot+'/img/flags_new/'+country;
+  img.width = 21;
   img.onerror = function(){
     this.src = StaticRoot+'/img/flags_new/None.png';
   }
@@ -71,7 +75,7 @@ function genTaskCase(line, task, solvedTasks, size){
     img.src = StaticRoot+'/img/solved.png';
     img.alt = "GG";
     img.width = 24;
-    var d = new Date(parseInt(solvedTasks[n][task].time)*900);
+    var d = new Date(parseInt(solvedTasks[n][task].time)*1000);
     img.title = d.toLocaleString();
   }
   else{
@@ -94,7 +98,7 @@ function headerTasks(body, arrayTasks){
   genCase(header, "Team", "19%");
   genCase(header, "Country", "12%");
   genCase(header, "Score", "10%");
-  arrayTasks.map(function(x) { return genCase(header, x, (100-50)/arrayTasks.length+"%"); })
+  arrayTasks.map(function(x) { return genCase(header, x, (100-50)/arrayTasks.length+"%", 'task'); })
   body.appendChild(header);
 }
 

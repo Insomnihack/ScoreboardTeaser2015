@@ -3,7 +3,7 @@
     <center>
       <img src="@{StaticR img_gears_gif}" #loading>
    <div .pure-u-1 #pad>
-     <div .pure-g>
+     <div .pure-g .is-center>
       <canvas #IOTRoom width=1024 height=700>
 
   <div #hideshow style="visibility: hidden;">
@@ -16,7 +16,7 @@
         <p>
         <center>
          <div .pure-form>
-          <input type="text" name="flag" placeholder="Enter your flag..." #flag>
+          <input type="text" name="flag" placeholder="Enter your flag here. Ex: INS{mofo}" #flag>
         <input type="hidden" name="taskname" #taskname>
         <div #exit>
           <img src="@{StaticR img_power_png}">

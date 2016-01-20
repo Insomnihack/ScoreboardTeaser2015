@@ -27,6 +27,15 @@ body {
     /*background-color: black;*/
 }
 
+.taskname{
+    -ms-transform:rotate(-45deg); /* IE 9 */
+    -moz-transform:rotate(-45deg); /* Firefox */
+    -webkit-transform:rotate(-45deg); /* Safari and Chrome */
+    -o-transform:rotate(-45deg); /* Opera */
+    transform:rotate(-45deg);
+    white-space: nowrap;
+}
+
 .pure-g h4 {
     color: white;
 }
@@ -118,10 +127,15 @@ body {
     margin:0 0 0 -250px;
     z-index:100;
 }
+
+#infosTask a {
+   color: #FF0700;
+}
+
 .popup_block .popup {
     float:left;
     width:100%;
-    background: rgba(1,2,3,0.4);
+    background: rgba(1,2,3,0.6);
     margin:10px 0;
     padding-left: 10px;
     padding-right: 10px;
@@ -196,7 +210,6 @@ img {
 }
 
 .l-box p {
-    word-wrap: break-word;
     margin: 0;
 }
 
@@ -504,7 +517,7 @@ a.pure-button-primary {
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin: 2em 0 1em;
+    margin: 2em 0 2em;
     color: white;
 }
 

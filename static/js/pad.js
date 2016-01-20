@@ -16,11 +16,17 @@ function loadImages(callback) {
     var sources = {
       background: 'background.png',
       cat_box_normal: 'cat_box_normal.png',
+      cat_box2_normal: 'cat_box_normal.png',
       cat_box_pwned: 'cat_box_pwned.png',
+      cat_box2_pwned: 'cat_box_pwned.png',
       cat_box_used: 'cat_box_used.png',
+      cat_box2_used: 'cat_box_used.png',
       coffee_maker_normal: 'coffee_maker_normal.png',
       coffee_maker_pwned: 'coffee_maker_pwned.png',
       coffee_maker_used: 'coffee_maker_used.png',
+      coffee_maker2_normal: 'coffee_maker2_normal.png',
+      coffee_maker2_pwned: 'coffee_maker_pwned.png',
+      coffee_maker2_used: 'coffee_maker2_used.png',
       fridge_normal: 'fridge_normal.png',
       fridge_pwned: 'fridge_pwned.png',
       fridge_used: 'fridge_used.png',
@@ -93,7 +99,19 @@ var objects = {
     x: 792,
     y: 364
   },
+  cat_box2:{
+    width: 133,
+    height: 79,
+    x: 792,
+    y: 364
+  },
   coffee_maker:{
+    width: 66,
+    height: 70,
+    x: 318,
+    y: 257
+  },
+  coffee_maker2:{
     width: 66,
     height: 70,
     x: 318,
@@ -140,15 +158,26 @@ function getTaskName(special){
 function redraw(){
   var can = document.getElementById('IOTRoom');
   var ctx = can.getContext('2d');
-  console.log(ctx.imageSmoothingEnabled);
   ctx.drawImage(images['background'], 0, 0, can.width, can.height);
-
+  var rbacedsolved = false;
+  var catboxsolved = false;
   for(var key in objects){
     var n = -1;
     if((n = solved.map(extractName).indexOf(getTaskName(key))) !== -1){
+      if(key === 'coffee_maker'){
+        rbacedsolved = true;
+        continue;
+      }
+      else if(key === 'cat_box'){
+        catboxsolved = true;
+        continue;
+      }
       ctx.drawImage(images[key+'_pwned'], 0, 0, can.width, can.height);
     }
     else{
+      if((key === 'coffee_maker2' && rbacedsolved === false) || (key === 'cat_box2' && catboxsolved === false)){
+        continue;
+      }
       if(key === used || key === clicked){
         ctx.drawImage(images[key+'_used'], 0, 0, can.width, can.height);
       }
@@ -167,6 +196,9 @@ function move(evt, can, click){
   used = '';
   can.style.cursor = 'auto';
   for(var key in objects){
+    if((key === 'coffee_maker' && (n = solved.map(extractName).indexOf(getTaskName(key))) !== -1) || (key === 'cat_box' && (n = solved.map(extractName).indexOf(getTaskName(key))) !== -1)){
+      continue;
+    }
     if(x > objects[key].x*coeff && x < objects[key].x*coeff+objects[key].width*coeff && y > objects[key].y*coeff && y < objects[key].y*coeff+objects[key].height*coeff){
       used = key;
       can.style.cursor = 'pointer';
@@ -187,10 +219,11 @@ function start(){
   }
   else{
     loadImages(function(images){
+      document.getElementById("loading").style.display = "none";
       window.onresize = function(){
         var can = document.getElementById("IOTRoom");
         var windowSize = viewport();
-        can.width = windowSize.width-416;
+        can.width = windowSize.width;
         can.height = can.width*0.68;
         if(can.width*0.68 > windowSize.height-75){
           can.height = windowSize.height-75;
@@ -210,7 +243,7 @@ function start(){
       can.addEventListener('click', function(evt){ move(evt, can, true); });
 
       var windowSize = viewport();
-      can.width = windowSize.width-400;
+      can.width = windowSize.width;
       can.height = can.width*0.68;
       if(can.width*0.68 > windowSize.height-75){
         can.height = windowSize.height-75;
@@ -265,6 +298,9 @@ function taskInfos(taskSpecial){
   for(var i = 0; i < Tasks.length; i++){
     if(Tasks[i].special === taskSpecial){
       var infos = Tasks[i];
+      if((infos.name === 'rbaced1' && (n = solved.map(extractName).indexOf(infos.name)) !== -1) || (infos.name === 'smartcat1' && (n = solved.map(extractName).indexOf(infos.name)) !== -1)){
+        continue;
+      }
       break;
     }
   }

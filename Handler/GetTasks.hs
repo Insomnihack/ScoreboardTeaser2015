@@ -7,7 +7,7 @@ import MyFunc
 
 getGetTasksR :: Handler Value
 getGetTasksR = do
-    tasks <- runDB $ selectList [TaskOpen ==. True] []
+    tasks <- runDB $ selectList [TaskOpen ==. True] [Asc TaskName]
     let final = map extractValues tasks
     modified <- isNewResponse $ T.pack $ show final
     addHeader ("Server"::T.Text) ("Teaser INS2K16"::T.Text)
