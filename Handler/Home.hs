@@ -14,9 +14,7 @@ getHomeR = do
             ((_, loginWidget), enctype) <- liftHandlerT $ runFormPost $ renderDivs loginForm
             defaultLayout $ do
                 setTitleI MsgHomeTitle
-                addScript $ StaticR js_message_js
                 $(widgetFile "homepage")
-                $(widgetFile "messages")
         Just _ -> do
             tasks <- runDB $ selectList [TaskOpen ==. True] [Asc TaskName]
             mTeamName <- lookupSession "teamName"
@@ -34,7 +32,6 @@ getHomeR = do
                 addScript $ StaticR js_pad_js
                 addScript $ StaticR js_message_js
                 $(widgetFile "homepageAuth")
-                $(widgetFile "messages")
 
 postHomeR :: Handler Html
 postHomeR = do

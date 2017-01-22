@@ -14,7 +14,7 @@ getGetMessagesR =
         allMessages <- runDB $ selectList [] [Desc MessageTimestamp]
         let final = toObject allMessages
         modified <- isNewResponse $ T.pack $ show final
-        addHeader ("Server"::T.Text) ("Teaser INS2K16"::T.Text)
+        addHeader ("Server"::T.Text) ("Teaser INSOMNI'HACK"::T.Text)
         if modified
             then
                 returnJson final

@@ -3,13 +3,13 @@
   <h2 .content-head .is-center>_{MsgHSubscribe}
   <p #message .pure-alert style="display:none">
   <div .pure-g>
-    <div .l-box-lrg .pure-u-1 .pure-u-md-2-5>
+    <div .register .l-box-lrg .pure-u-1 .pure-u-md-2-5>
       <h4>_{MsgRegisterTeam}
       <form method=post enctype=#{enctypeAccount} action=@{SubscribeR} .pure-form .pure-form-stacked>
         <fieldset>
           ^{newAccountWidget}
           <input type=submit value="Sign Up" .pure-button>
-    <div .l-box-lrg .pure-u-1 .pure-u-md-3-5>
+    <div .register .l-box-lrg .pure-u-1 .pure-u-md-3-5>
       <h4>_{MsgRstPassword}
       <p>
         <form method=post enctype=#{enctypeReset} action=@{ResetPasswordR} .pure-form .pure-form-stacked>

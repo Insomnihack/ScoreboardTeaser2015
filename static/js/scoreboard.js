@@ -126,5 +126,5 @@ function loadHTMLScoreboard(object){
 
 window.addEventListener('load', function(){
   getScoreboard(loadHTMLScoreboard, true);
-  window.setInterval(function () { if(Focus) { getScoreboard(loadHTMLScoreboard, false) } }, 5000);
+  window.setInterval(function () { if(Focus) { getScoreboard(loadHTMLScoreboard, false) } }, 30*1000);
 });

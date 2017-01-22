@@ -62,8 +62,8 @@ getGetScoreboardR :: Handler Value
 getGetScoreboardR = do
     addHeader ("Access-Control-Allow-Origin"::T.Text) ("*"::T.Text)
     addHeader ("Access-Control-Expose-Headers"::T.Text) ("Etag"::T.Text)
-    addHeader ("Server"::T.Text) ("Teaser INS2K16"::T.Text)
-    cacheSeconds 30
+    addHeader ("Server"::T.Text) ("Teaser INSOMNI'HACK"::T.Text)
+    cacheSeconds 1
     allTeams <- runDB $ selectList [TeamVerified ==. True] [Desc TeamLogin]
     allTasks <- runDB $ selectList [TaskOpen ==. True] [Asc TaskName]
     allSolved :: [Entity Solved] <- runDB $ selectList [] []
@@ -93,14 +93,18 @@ getGetScoreboardR = do
                             "time" .= (round $ utcTimeToPOSIXSeconds $ sel3 stask :: Int)
                         ]
                     ]
-            in [object[
-                    "pos" .= i,
-                    "team" .= sel1 x,
-                    "country" .= sel2 x,
-                    "score" .= sel3 x,
-                    "taskStats" .= map toTaskObject (sel4 x),
-                    "lastAccept" .= (round $ utcTimeToPOSIXSeconds $ sel5 x :: Int)]]
-                ++ (toObject (i+1) xs)
+            in
+              if (sel3 x) > 0 then
+                [object[
+                      "pos" .= i,
+                      "team" .= sel1 x,
+                      "country" .= sel2 x,
+                      "score" .= sel3 x,
+                      "taskStats" .= map toTaskObject (sel4 x),
+                      "lastAccept" .= (round $ utcTimeToPOSIXSeconds $ sel5 x :: Int)]]
+                  ++ (toObject (i+1) xs)
+              else
+                (toObject (i+1) xs)
 
 
 

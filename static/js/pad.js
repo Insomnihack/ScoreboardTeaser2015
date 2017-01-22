@@ -1,70 +1,19 @@
-function viewport() {
-  var e = window
-  var a = 'inner';
-  if ( !( 'innerWidth' in window ) ){
-    a = 'client';
-    e = document.documentElement || document.body;
-  }
-  return { width : e[ a+'Width' ] , height : e[ a+'Height' ] }
-}
+$("#in-screen").delegate('.challenges', 'click', function() {
+  var id = $(this).data('challid');
+  var infos = Tasks[id];
+  document.getElementById('hideshow').style.visibility = 'visible';
+  var divInfos = document.getElementById("infosTask");
+  divInfos.children[1].children[0].textContent = infos.name+' - '+infos.type+' - '+infos.value+' pts - created by '+infos.author;
+  var flag = document.getElementById("flag")
+  flag.value="";
+  flag.focus();
+  divInfos.children[2].innerHTML = infos.description;
+  divInfos.children[4].value = infos.name;
+});
 
-var solved = [];
+$('#in-screen').perfectScrollbar();
+$('#notifs').perfectScrollbar();
 
-var images = {};
-function loadImages(callback) {
-    var windowSize = viewport();
-    var sources = {
-      background: 'background.png',
-      cat_box_normal: 'cat_box_normal.png',
-      cat_box2_normal: 'cat_box_normal.png',
-      cat_box_pwned: 'cat_box_pwned.png',
-      cat_box2_pwned: 'cat_box_pwned.png',
-      cat_box_used: 'cat_box_used.png',
-      cat_box2_used: 'cat_box_used.png',
-      coffee_maker_normal: 'coffee_maker_normal.png',
-      coffee_maker_pwned: 'coffee_maker_pwned.png',
-      coffee_maker_used: 'coffee_maker_used.png',
-      coffee_maker2_normal: 'coffee_maker2_normal.png',
-      coffee_maker2_pwned: 'coffee_maker_pwned.png',
-      coffee_maker2_used: 'coffee_maker2_used.png',
-      fridge_normal: 'fridge_normal.png',
-      fridge_pwned: 'fridge_pwned.png',
-      fridge_used: 'fridge_used.png',
-      plant_normal: 'plant_normal.png',
-      plant_pwned: 'plant_pwned.png',
-      plant_used: 'plant_used.png',
-      sex_toy_normal: 'sex_toy_normal.png',
-      sex_toy_pwned: 'sex_toy_pwned.png',
-      sex_toy_used: 'sex_toy_used.png',
-      toaster_normal: 'toaster_normal.png',
-      toaster_pwned: 'toaster_pwned.png',
-      toaster_used: 'toaster_used.png'
-    }
-    var loadedImages = 0;
-    var numImages = 0;
-    var src;
-    for(src in sources) {
-        numImages++;
-    }
-    for(src in sources) {
-      images[src] = new Image();
-      images[src].onload = function() {
-          if(++loadedImages >= numImages) {
-              callback(images);
-          }
-      };
-
-      if(windowSize.width < 1500){
-        images[src].src = StaticRoot+'/img/IOTRoomLow/'+sources[src];
-      }
-      else if(windowSize.width < 2100){
-        images[src].src = StaticRoot+'/img/IOTRoom/'+sources[src];
-      }
-      else{
-        images[src].src = StaticRoot+'/img/IOTRoomHD/'+sources[src];
-      }
-    }
-}
 
 function refreshScore(neverDrawn){
   requestScore = new XMLHttpRequest();
@@ -77,8 +26,10 @@ function refreshScore(neverDrawn){
         var data = JSON.parse(requestScore.responseText);
         var teamStatus = document.getElementById("teamstatus");
         teamStatus.textContent = data.teamName+" - "+data.score+" PTS";
+        data.solved.forEach(function(s) {
+          $("a[data-chall='" + s.name +"']").addClass('solved');
+        });
         solved = data.solved;
-        redraw();
       }
     } else{
         console.log("request status"+requestScore.status);
@@ -92,174 +43,6 @@ function refreshScore(neverDrawn){
   requestScore.send();
 }
 
-var objects = {
-  cat_box:{
-    width: 133,
-    height: 79,
-    x: 792,
-    y: 364
-  },
-  cat_box2:{
-    width: 133,
-    height: 79,
-    x: 792,
-    y: 364
-  },
-  coffee_maker:{
-    width: 66,
-    height: 70,
-    x: 318,
-    y: 257
-  },
-  coffee_maker2:{
-    width: 66,
-    height: 70,
-    x: 318,
-    y: 257
-  },
-  fridge:{
-    width: 280,
-    height: 445,
-    x: 13,
-    y: 120
-  },
-  plant:{
-    width: 71,
-    height: 114,
-    x: 628,
-    y: 218
-  },
-  sex_toy:{
-    width: 92,
-    height: 104,
-    x: 608,
-    y: 531
-  },
-  toaster:{
-    width: 76,
-    height: 65,
-    x: 564,
-    y: 333
-  },
-};
-
-var coeff = 1;
-var used = '';
-var clicked = '';
-
-function getTaskName(special){
-  for(var i = 0; i < Tasks.length; i++){
-    if(special === Tasks[i].special){
-      return Tasks[i].name;
-    }
-  }
-}
-
-function redraw(){
-  var can = document.getElementById('IOTRoom');
-  var ctx = can.getContext('2d');
-  ctx.drawImage(images['background'], 0, 0, can.width, can.height);
-  var rbacedsolved = false;
-  var catboxsolved = false;
-  for(var key in objects){
-    var n = -1;
-    if((n = solved.map(extractName).indexOf(getTaskName(key))) !== -1){
-      if(key === 'coffee_maker'){
-        rbacedsolved = true;
-        continue;
-      }
-      else if(key === 'cat_box'){
-        catboxsolved = true;
-        continue;
-      }
-      ctx.drawImage(images[key+'_pwned'], 0, 0, can.width, can.height);
-    }
-    else{
-      if((key === 'coffee_maker2' && rbacedsolved === false) || (key === 'cat_box2' && catboxsolved === false)){
-        continue;
-      }
-      if(key === used || key === clicked){
-        ctx.drawImage(images[key+'_used'], 0, 0, can.width, can.height);
-      }
-      else{
-        ctx.drawImage(images[key+'_normal'], 0, 0, can.width, can.height);
-      }
-    }
-  }
-}
-
-function move(evt, can, click){
-  var rect = can.getBoundingClientRect();
-  var x = evt.clientX - rect.left;
-  var y = evt.clientY - rect.top;
-  // var object = objects[Tasks[i]['special']];
-  used = '';
-  can.style.cursor = 'auto';
-  for(var key in objects){
-    if((key === 'coffee_maker' && (n = solved.map(extractName).indexOf(getTaskName(key))) !== -1) || (key === 'cat_box' && (n = solved.map(extractName).indexOf(getTaskName(key))) !== -1)){
-      continue;
-    }
-    if(x > objects[key].x*coeff && x < objects[key].x*coeff+objects[key].width*coeff && y > objects[key].y*coeff && y < objects[key].y*coeff+objects[key].height*coeff){
-      used = key;
-      can.style.cursor = 'pointer';
-      if(click){
-        clicked = key;
-        taskInfos(key);
-      }
-      break;
-    }
-  }
-
-  redraw();
-}
-
-function start(){
-  if(typeof(StaticRoot) === 'undefined'){
-    setTimeout(start, 10);
-  }
-  else{
-    loadImages(function(images){
-      document.getElementById("loading").style.display = "none";
-      window.onresize = function(){
-        var can = document.getElementById("IOTRoom");
-        var windowSize = viewport();
-        can.width = windowSize.width;
-        can.height = can.width*0.68;
-        if(can.width*0.68 > windowSize.height-75){
-          can.height = windowSize.height-75;
-          can.width = can.height/0.68;
-        }
-        coeff = can.width/1024;
-        redraw();
-      }
-
-      var can = document.getElementById("IOTRoom");
-      var exit = document.getElementById("exit");
-      exit.addEventListener("click", function(){
-        close();
-      });
-
-      can.addEventListener('mousemove', function(evt){ move(evt, can); });
-      can.addEventListener('click', function(evt){ move(evt, can, true); });
-
-      var windowSize = viewport();
-      can.width = windowSize.width;
-      can.height = can.width*0.68;
-      if(can.width*0.68 > windowSize.height-75){
-        can.height = windowSize.height-75;
-        can.width = can.height/0.68;
-      }
-      coeff = can.width/1024;
-      refreshScore(true);
-      window.setInterval(function () { if(Focus) { refreshScore(false)} }, 1000*60);
-    });
-  }
-}
-
-window.addEventListener('load', function(){
-  start();
-});
-
 window.addEventListener("keydown", function(e){
   if(e.keyCode === 27){
     close();
@@ -270,10 +53,6 @@ window.addEventListener("keydown", function(e){
     }
   }
 });
-
-function extractName(solvedTask){
-  return solvedTask.name;
-}
 
 function getTaskIDs(callback){
   requestTaskIDs = new XMLHttpRequest();
@@ -294,33 +73,11 @@ function getTaskIDs(callback){
   requestTaskIDs.send();
 }
 
-function taskInfos(taskSpecial){
-  for(var i = 0; i < Tasks.length; i++){
-    if(Tasks[i].special === taskSpecial){
-      var infos = Tasks[i];
-      if((infos.name === 'rbaced1' && (n = solved.map(extractName).indexOf(infos.name)) !== -1) || (infos.name === 'smartcat1' && (n = solved.map(extractName).indexOf(infos.name)) !== -1)){
-        continue;
-      }
-      break;
-    }
-  }
-  document.getElementById('hideshow').style.visibility = 'visible';
-  var divInfos = document.getElementById("infosTask");
-  divInfos.children[1].children[0].textContent = infos.name+' - '+infos.type+' - '+infos.value+' pts - realized by '+infos.author;
-  var flag = document.getElementById("flag")
-  flag.value="";
-  flag.focus();
-  divInfos.children[2].innerHTML = infos.description;
-  divInfos.children[4].value = infos.name;
-}
-
-
 function close(){
   var divInfos = document.getElementById("infosTask");
   divInfos.children[0].innerHTML = "";
   document.getElementById('hideshow').style.visibility='hidden';
   clicked = '';
-  redraw();
 }
 
 
@@ -338,6 +95,7 @@ function submitFlag(){
         close();
         eval(data.event);
         refreshScore(false);
+        getScoreboard(loadHTMLScoreboard, false);
       }
     } else {
       //
@@ -349,4 +107,67 @@ function submitFlag(){
   };
 
   requestFlag.send(flag);
+}
+
+function getScoreboard(callback, neverDrawn){
+  requestScoreboard = new XMLHttpRequest();
+  requestScoreboard.open('GET', CacheRoot+GetScoreboardR, true);
+
+  requestScoreboard.onload = function() {
+    if (requestScoreboard.status >= 200 && requestScoreboard.status < 400){
+        var etag = requestScoreboard.getResponseHeader("ETag");
+        if(sessionStorage.getItem("cachedEtagScore") !== etag || neverDrawn){
+            sessionStorage.setItem("cachedEtagScore", etag);
+            data = JSON.parse(requestScoreboard.responseText);
+            callback(data);
+        }
+    } else if(requestScoreboard.status==1 || requestScoreboard.status==0) {
+        getScoreboard(callback, neverDrawn);
+    } else{
+        console.log("requestScoreboard status"+requestScoreboard.status);
+    }
+  };
+
+  requestScoreboard.onerror = function() {
+    console.log("requestScoreboard error");
+  };
+
+  requestScoreboard.send();
+}
+
+window.onload = function() {
+  var exit = document.getElementById("exit");
+  exit.addEventListener("click", function(){
+    close();
+  });
+  Tasks.forEach(function(task, id) {
+    $("#in-screen").append($("#template-challenge").html().replace('#id#',id).replace('#chall#',task.name).replace('#name#',task.name).replace('#type#',task.type).replace('#points#',task.value));
+  });
+
+  getScoreboard(loadHTMLScoreboard, true);
+  window.setInterval(function () { if(Focus) { getScoreboard(loadHTMLScoreboard, false) } }, 30*1000);
+
+  refreshScore(true);
+  window.setInterval(function () { if(Focus) { refreshScore(false)} }, 1000*60);
+}
+
+function loadHTMLScoreboard(object){
+  var result = {}
+  object.tasks.forEach(function(task) {
+    result[task] = {name: task, count: 0};
+  })
+  object.standings.forEach(function(team) {
+    team.taskStats.forEach(function(task) {
+      result[Object.keys(task)[0]].count += 1;
+    });
+  });
+
+  Object.keys(result).forEach(function(task) {
+    if (result[task].count < 2) {
+      $("a[data-chall='" + task +"'] .chall-solvers").text('('+result[task].count+' solver)');
+    } else {
+      $("a[data-chall='" + task +"'] .chall-solvers").text('('+result[task].count+' solvers)');
+    }
+
+  });
 }

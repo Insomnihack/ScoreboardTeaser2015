@@ -2,13 +2,13 @@
   <div .image-bg .skull>
   <h2 .content-head .is-center>_{MsgHRules}
   <div>
-    Greetings and welcome to our fourth Insomni'hack teaser!
+    Greetings and welcome to our fifth Insomni'hack teaser!
     <br>
     <br>
-    The teaser will start on <span class="hl">January 16th at 9am UTC</span> and will last <span class="hl">36 hours</span>.
+    The teaser will start on <span class="hl">January 21st at 9am UTC</span> and will last <span class="hl">36 hours</span>.
     <br>
     <br>
-    Categories will be <span class="hl">Pwning</span>, <span class="hl">Web</span> and <span class="hl">Crypto</span>.
+    Categories will be <span class="hl">Pwning</span>, <span class="hl">Web</span>, <span class="hl">Crypto</span>, <span class="hl">Reverse</span> and <span class="hl">Forensic</span> .
     <br>
     There will be no bonus points so the final ranking will be determined based on the time of the last challenge solved, ie first come first served.
     <br>
@@ -19,9 +19,9 @@
       <li><strong>Twitter :</strong> <a href="https://twitter.com/1ns0mn1h4ck"style="color:white;">https://twitter.com/1ns0mn1h4ck</a>
     <strong .hl>Prizes:
     <ul>
-      <li>We will cover hotel (2 nights) and conference tickets for Insomni'hack 2016 for the first 3 teams.
+      <li>We will cover hotel (2 nights) and conference tickets for Insomni'hack 2017 for the first 3 teams.
       <li>The 4th, 5th and 6th teams will receive tickets for the conference.
-      <li>The conference will take place on the 18th of March 2016 at the Palexpo conference center in Geneva.
+      <li>The conference will take place on the 24th of March 2017 at the Palexpo conference center in Geneva.
       <li>The CTF will run during the evening and the night and is free for everyone to participate in.
     <br>
     <strong .hl>Rules :

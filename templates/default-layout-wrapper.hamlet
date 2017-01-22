@@ -14,8 +14,8 @@ $newline never
 
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <style>
-            .pure-menu.pure-menu-open.pure-menu-fixed { background-image: url("#{Settings.staticRoot $ settings master}/img/insomnihack.png"); }
-            .skull { background: no-repeat top right; background-image:url("#{Settings.staticRoot $ settings master}/img/baskerville-child-crane-bg.png"); }
+            .skull { background: no-repeat top right; background-image:url("#{Settings.staticRoot $ settings master}/img/skull.gif"); }
+            @font-face { font-family: "Terminator"; src: url("#{Settings.staticRoot $ settings master}/fonts/terminator.ttf"); }
 
         ^{pageHead pc}
 
@@ -28,6 +28,16 @@ $newline never
     <body>
         <div .header>
             <div .home-menu .pure-menu .pure-menu-open .pure-menu-horizontal .pure-menu-fixed>
+                <div #logo>
+                    <span .white .title .first>
+                        INS
+                    <span .fa .fa-globe .redfont aria-hidden="true">
+                    <span .white .title>
+                        MNI'
+                    <span .redfont .title>
+                        HACK
+                    <span .redfont>
+                         - RISE OF THE MACHINES
                 <ul>
                     $if (==) (show $ Just HomeR) (show currRoute)
                         <li .pure-menu-selected>

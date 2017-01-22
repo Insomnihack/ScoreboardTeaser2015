@@ -137,7 +137,7 @@ instance Yesod App where
 
     defaultLayout widget = do
         master <- getYesod
-        addHeader ("Server"::T.Text) ("Teaser INS2K16"::T.Text)
+        addHeader ("Server"::T.Text) ("Teaser INSOMNI'HACK"::T.Text)
         mport <- lookupHeader "X-Forwarded-Port"
         case mport of
             Just port -> do
@@ -169,6 +169,9 @@ instance Yesod App where
             addStylesheet $ StaticR css_grids_responsive_min_css
             addStylesheet $ StaticR css_layout_css
             addStylesheet $ StaticR css_purealert_css
+            addStylesheet $ StaticR css_font_awesome_css
+            addStylesheet $ StaticR css_perfect_scrollbar_min_css
+            addScript $ StaticR js_jquery_js
             $(widgetFile "default-layout")
         withUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")
 
@@ -255,7 +258,7 @@ instance AccountSendEmail App where
         let completeUrl = T.concat [hostname, url]
         let content = unlines [ "Hello and welcome to Insomni'hack CTF teaser.",
                                 "",
-                                "You have registered a team for the Insomni'hack teaser 2016.",
+                                "You have registered a team for the Insomni'hack teaser 2017.",
                                 "",
                                 "Your team details :",
                                 "Team name : " ++ T.unpack uname,
@@ -269,9 +272,9 @@ instance AccountSendEmail App where
                                 "Infos",
                                 "=======",
                                 "",
-                                "The CTF will run from Jan. 16, 2016, 9 a.m. to Jan. 17, 2016, 21 p.m. UTC",
+                                "The CTF will run from Jan. 21, 2017, 9 a.m. to Jan. 17, 2017, 21 p.m. UTC",
                                 "You can check your timezone here :",
-                                "http://www.timeanddate.com/worldclock/converter.html?year=2016&month=1&day=16&hour=9&min=0&sec=0&p1=0&p2=270",
+                                "http://www.timeanddate.com/worldclock/converter.html?year=2017&month=1&day=21&hour=9&min=0&sec=0&p1=0&p2=270",
                                 "",
                                 "Please check the rules on the main site here :",
                                 "https://teaser.insomnihack.ch/rules",

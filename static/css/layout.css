@@ -4,6 +4,83 @@
     box-sizing: border-box;
 }
 
+h1, h2, h4, h5, #logo {
+    font-family: "Terminator";
+}
+
+section {
+    width:70%;
+    height:80%;
+    margin-top:74px;
+    position: fixed;
+}
+
+section .challenges {
+    cursor: pointer;
+}
+
+section #in-screen {
+    height:100%;
+    width:49%;
+    display:inline-block;
+    vertical-align:top;
+    word-wrap: break-word;
+    overflow:hidden;
+    position:relative;
+}
+
+section #notifs {
+    width:45%;
+    margin-left:8px;
+    display:inline-block;
+    height:100%;
+    vertical-align:top;
+    word-wrap: break-word;
+    overflow:hidden;
+    position:relative;
+    margin-left:40px;
+}
+
+section #notifs .notif {
+    font-size:1.1em;
+    margin-bottom:20px;
+}
+
+section .chall {
+    text-align:center;
+    width:40%;
+    height:20%;
+    min-height:160px;
+    border:1px solid #515151;
+    display:inline-block;
+    margin:2px;
+    vertical-align:top;
+    font-size:1.1em;
+}
+
+section #in-screen a {
+    text-decoration:none;
+    color:#fff;
+}
+
+section .chall .chall-label {
+    margin-top:1px;
+    padding:5px;
+    border-bottom:3px #fff solid;
+    margin-bottom:8px;
+    min-height:45px;
+}
+
+.notif h2 {
+    font-size:0.8em;
+    padding:0;
+    margin:0;
+}
+
+.notif .timestamp {
+    margin-bottom:10px;
+}
+
 /*
  * -- BASE STYLES --
  * Most of these are inherited from Base, but I want to change a few.
@@ -14,17 +91,12 @@ html {
 }
 
 body {
-    line-height: 1.7em;
-    color: white;
-    font-size: 13px;
     background-color: #262626;
-    /*background-color: #f5f9f6;*/
-    margin: 0;
     padding: 0;
-    height: 100%;
+    margin: 0;
+    color: #fff;
     font-size: 16px;
     font-family: roboto, sans-serif;
-    /*background-color: black;*/
 }
 
 .taskname{
@@ -94,15 +166,19 @@ body {
 	border-spacing: 0;
 }
 
+.register {
+    padding-right: 40px;
+}
+
 #infosTask {
 	letter-spacing: initial;
 }
 
-#exit {
+#in-exit {
     text-align:center;
 }
 
-#exit img{
+#in-exit img{
     margin-top: 15px;
     cursor: pointer;
 }
@@ -115,7 +191,7 @@ body {
     left:0;
 }
 .popup_block {
-    background: rgba(1,2,3,0.1);
+    background: rgba(1,2,3,1);
     padding: 1px 10px;
     border:1px solid white;
     float:left;
@@ -166,8 +242,7 @@ body {
 	z-index: -2;
 	position: fixed;
 	width: 100%;
-	height: 100%;
-	top: -50px;
+	height: 90%;
 	background-size: auto 100%;
 }
 
@@ -175,18 +250,6 @@ body {
 .required label{
     color:white;
 /* color: #C62026; */
-}
-
-
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-label {
-    color: #000000;
 }
 
 .pure-img-responsive {
@@ -211,11 +274,6 @@ img {
 
 .l-box p {
     margin: 0;
-}
-
-.l-box-lrg {
-    padding: 2em;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .is-center {
@@ -320,6 +378,10 @@ a.pure-button-primary {
     margin-bottom:10px;
 }
 
+.solved .chall {
+    background-color: #336633;
+}
+
 .solved-button {
     width: 31%;
     margin-bottom:10px;
@@ -376,11 +438,27 @@ a.pure-button-primary {
 }
 
 #logo {
-	background-color: black;
-	margin-left: auto;
-	margin-right: auto;
-	height: 100%;
-    padding-top: 50px;
+	display: inline-block;
+    float: left;
+    zoom: 1;
+    vertical-align: middle;
+    line-height: 32px;
+}
+
+#logo .first {
+    margin-left:10px;
+}
+
+#logo .redfont {
+    color:#C72127;
+}
+
+#logo .white {
+    color:#FFFFFF;
+}
+
+#logo .title, #logo .fa {
+    font-size:1.8em;
 }
 
 /*
@@ -565,4 +643,23 @@ ul {
 
 .hl {
 	color: #C62026;
+}
+
+
+@media screen and (min-width: 1500px) {
+    section #in-screen {
+        width:63%;
+    }
+
+    section #notifs {
+        width:30%;
+    }
+
+    section {
+        width:80%;
+    }
+
+    section .chall {
+        width:30%;
+    }
 }

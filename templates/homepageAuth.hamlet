@@ -1,22 +1,38 @@
-<div .pure-g style="height: 100%;">
-  <div .splash-container>
-    <center>
-      <img src="@{StaticR img_gears_gif}" #loading>
-   <div .pure-u-1 #pad>
-     <div .pure-g .is-center>
-      <canvas #IOTRoom width=1024 height=700>
+<section>
+  <div .image-bg .skull>
+  <div id="notifs">
+    <h2>
+      INFOS
+  <div id="in-screen">
+    <h2>
+      CHALLENGES
 
-  <div #hideshow style="visibility: hidden;">
-    <div #fade>
-    <div .popup_block>
-      <div .popup #infosTask>
-        <p>
-        <center>
-          <h3>
-        <p>
-        <center>
-         <div .pure-form>
-          <input type="text" name="flag" placeholder="Enter your flag here. Ex: INS{mofo}" #flag>
-        <input type="hidden" name="taskname" #taskname>
-        <div #exit>
-          <img src="@{StaticR img_power_png}">
+<div #hideshow style="visibility: hidden;">
+  <div #fade>
+  <div .popup_block>
+    <div .popup #infosTask>
+      <p>
+      <center>
+        <h3>
+      <p>
+      <center>
+       <div .pure-form>
+        <input type="text" name="flag" placeholder="Enter your flag here. Ex: INS{mofo}" #flag>
+      <input type="hidden" name="taskname" #taskname>
+      <div #in-exit>
+        <img #exit src="@{StaticR img_power_png}">
+
+
+<script type="text/template" id="template-challenge">
+  <a tabindex="-1" .challenges data-challid="#id#" data-chall="#chall#">
+    <div .chall>
+      <div .chall-label>#name#&nbsp;
+      <div .chall-type>#type#&nbsp;
+      <div .chall-points>#points# points
+      <div .chall-solvers>
+
+<script type="text/template" id="template-notifs">
+    <div class="notif">
+      <h3>#title#&nbsp;
+      <div .timestamp>#ts#&nbsp;
+      <div>#text#&nbsp;
